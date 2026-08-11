@@ -6,31 +6,39 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <title>LITTLE HAPPINESS</title>
 
 <style>
 
-* {
+:root{
 
-  box-sizing: border-box;
+  --ink:#4f5445;
+
+  --olive:#8f9d68;
+
+  --line:rgba(154,164,111,.58);
+
+  --paper:rgba(255,253,247,.86);
+
+  --paper-strong:rgba(255,253,247,.94);
+
+  --gold:#c69d39;
 
 }
 
-html, body {
+*{
 
-  margin: 0;
-
-  padding: 0;
-
-  min-height: 100%;
+  box-sizing:border-box;
 
 }
 
-body {
+html,body{
 
-  min-height: 100vh;
+  margin:0;
+
+  min-height:100%;
 
   font-family:
 
@@ -46,559 +54,575 @@ body {
 
     sans-serif;
 
-  color: #464a3c;
-
-  background:
-
-    linear-gradient(
-
-      155deg,
-
-      #fffaf6 0%,
-
-      #fff3f4 30%,
-
-      #f7f5db 68%,
-
-      #eef4e7 100%
-
-    );
-
-  overflow-x: hidden;
+  color:var(--ink);
 
 }
 
-/* ===== 亞洲地標背景 ===== */
+body{
 
-.landmark-wrap {
+  min-height:100vh;
 
-  position: fixed;
+  background:#f7f3e8;
 
-  inset: 0;
-
-  z-index: 0;
-
-  pointer-events: none;
-
-  overflow: hidden;
+  overflow-x:hidden;
 
 }
 
-.landmark-art {
+#bgPhoto{
 
-  position: absolute;
+  position:fixed;
 
-  width: 100%;
+  inset:0;
 
-  bottom: 2%;
+  z-index:0;
 
-  left: 0;
+  background-repeat:no-repeat;
 
-  opacity: 0.07;
+  background-position:center;
 
-  color: #77845e;
+  background-size:cover;
 
-  transition: opacity .5s ease;
-
-}
-
-.landmark-art svg {
-
-  width: 100%;
-
-  height: auto;
-
-  display: block;
+  transition:.35s ease;
 
 }
 
-/* ===== 主要畫面 ===== */
+#bgVeil{
 
-.page {
+  position:fixed;
 
-  position: relative;
+  inset:0;
 
-  z-index: 2;
+  z-index:1;
 
-  width: 100%;
+  pointer-events:none;
 
-  min-height: 100vh;
+  background:linear-gradient(
 
-  display: flex;
+    180deg,
 
-  align-items: center;
+    rgba(255,250,247,.40),
 
-  justify-content: center;
+    rgba(250,248,231,.55)
 
-  padding: 32px 22px 52px;
-
-}
-
-.shell {
-
-  width: 100%;
-
-  max-width: 430px;
+  );
 
 }
 
-.panel {
+.page{
 
-  position: relative;
+  position:relative;
 
-  background: rgba(255, 255, 252, 0.88);
+  z-index:2;
 
-  border: 1px solid rgba(173, 181, 126, .58);
+  min-height:100vh;
 
-  border-radius: 28px;
+  display:flex;
 
-  padding: 42px 26px 34px;
+  align-items:center;
 
-  box-shadow:
+  justify-content:center;
 
-    0 18px 45px rgba(90, 90, 65, .10);
-
-  backdrop-filter: blur(5px);
-
-  text-align: center;
-
-  overflow: hidden;
+  padding:34px 22px calc(44px + env(safe-area-inset-bottom));
 
 }
 
-.main-star {
+.shell{
 
-  color: #c69d39;
+  width:100%;
 
-  font-size: 27px;
-
-  margin-bottom: 18px;
+  max-width:430px;
 
 }
 
-h1 {
+.panel{
 
-  margin: 0 0 36px;
+  background:rgba(255,253,247,.87);
 
-  font-family: Georgia, "Times New Roman", serif;
+  border:1px solid var(--line);
 
-  font-size: 28px;
+  border-radius:28px;
 
-  font-weight: 500;
+  padding:38px 24px 30px;
 
-  letter-spacing: 2px;
+  text-align:center;
 
-  color: #404638;
+  box-shadow:0 18px 46px rgba(70,70,45,.14);
 
-}
+  backdrop-filter:blur(8px);
 
-.intro {
-
-  margin: 0 auto 34px;
-
-  font-size: 18px;
-
-  line-height: 2;
-
-  color: #55594c;
+  -webkit-backdrop-filter:blur(8px);
 
 }
 
-button {
+.hidden{
 
-  appearance: none;
-
-  border: none;
-
-  font-family: inherit;
-
-  cursor: pointer;
-
-  transition:
-
-    transform .15s ease,
-
-    opacity .2s ease;
+  display:none !important;
 
 }
 
-button:active {
+.main-star,
 
-  transform: scale(.97);
+.card-star,
 
-}
+.end-star{
 
-.primary-btn {
-
-  min-width: 225px;
-
-  padding: 16px 26px;
-
-  border-radius: 999px;
-
-  background: #9cab72;
-
-  color: #fff;
-
-  font-size: 17px;
-
-  letter-spacing: 1px;
-
-  box-shadow:
-
-    0 8px 20px rgba(110, 125, 80, .18);
+  color:var(--gold);
 
 }
 
-.secondary-btn {
+.main-star{
 
-  margin-top: 22px;
+  font-size:26px;
 
-  padding: 13px 24px;
-
-  border-radius: 999px;
-
-  background: transparent;
-
-  color: #79855d;
-
-  border: 1px solid #aeb98a;
-
-  font-size: 15px;
+  margin-bottom:18px;
 
 }
 
-.hidden {
+h1{
 
-  display: none !important;
+  margin:0 0 34px;
 
-}
+  font-family:Georgia,"Times New Roman",serif;
 
-/* ===== 抽卡動畫 ===== */
+  font-size:28px;
 
-.flight-screen {
+  font-weight:500;
 
-  display: none;
+  letter-spacing:2px;
 
-  min-height: 315px;
-
-  align-items: center;
-
-  justify-content: center;
-
-  flex-direction: column;
-
-  position: relative;
+  color:#414739;
 
 }
 
-.flight-text {
+.intro{
 
-  margin-top: 165px;
+  font-size:18px;
 
-  font-size: 14px;
+  line-height:2;
 
-  letter-spacing: 1px;
+  margin:0 auto 32px;
 
-  color: #858d70;
-
-}
-
-.flight-route {
-
-  position: absolute;
-
-  width: 300px;
-
-  height: 160px;
-
-  top: 35px;
-
-  left: 50%;
-
-  transform: translateX(-50%);
+  color:#55594d;
 
 }
 
-.route-line {
+button{
 
-  fill: none;
+  appearance:none;
 
-  stroke: #c5ad6d;
+  -webkit-appearance:none;
 
-  stroke-width: 1.5;
+  border:0;
 
-  stroke-dasharray: 5 7;
+  font-family:inherit;
 
-  opacity: .65;
-
-}
-
-.plane {
-
-  position: absolute;
-
-  left: 36px;
-
-  top: 112px;
-
-  font-size: 27px;
-
-  color: #8c986d;
-
-  animation:
-
-    flyPlane 1.35s cubic-bezier(.25,.6,.35,1) forwards;
+  cursor:pointer;
 
 }
 
-@keyframes flyPlane {
+.primary-btn,
 
-  0% {
+.secondary-btn{
 
-    transform:
+  border-radius:999px;
 
-      translate(0, 15px)
+  letter-spacing:.5px;
 
-      rotate(-12deg);
+  transition:transform .12s ease;
 
-    opacity: 0;
+}
+
+button:active{
+
+  transform:scale(.97);
+
+}
+
+.primary-btn{
+
+  min-width:230px;
+
+  padding:16px 26px;
+
+  background:var(--olive);
+
+  color:#fff;
+
+  font-size:17px;
+
+  box-shadow:0 8px 20px rgba(90,105,62,.18);
+
+}
+
+.secondary-btn{
+
+  margin-top:20px;
+
+  padding:13px 23px;
+
+  background:rgba(255,253,247,.76);
+
+  color:#78845b;
+
+  border:1px solid #aab585;
+
+  font-size:15px;
+
+}
+
+.flight-screen{
+
+  min-height:310px;
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  flex-direction:column;
+
+  position:relative;
+
+}
+
+.flight-route{
+
+  position:absolute;
+
+  width:300px;
+
+  height:160px;
+
+  top:38px;
+
+  left:50%;
+
+  transform:translateX(-50%);
+
+}
+
+.route-line{
+
+  fill:none;
+
+  stroke:#c5ad6d;
+
+  stroke-width:1.5;
+
+  stroke-dasharray:5 7;
+
+  opacity:.72;
+
+}
+
+.plane{
+
+  position:absolute;
+
+  left:36px;
+
+  top:112px;
+
+  font-size:28px;
+
+  color:#7f8c63;
+
+}
+
+.flight-text{
+
+  margin-top:160px;
+
+  font-size:14px;
+
+  letter-spacing:1px;
+
+  color:#707960;
+
+}
+
+@keyframes flyPlane{
+
+  0%{
+
+    transform:translate(0,15px) rotate(-12deg);
+
+    opacity:0;
 
   }
 
-  15% {
+  15%{
 
-    opacity: 1;
+    opacity:1;
 
   }
 
-  100% {
+  100%{
 
-    transform:
+    transform:translate(230px,-83px) rotate(-9deg);
 
-      translate(230px, -83px)
-
-      rotate(-9deg);
-
-    opacity: 0;
+    opacity:0;
 
   }
 
 }
 
-/* ===== 卡片 ===== */
+.result-card{
 
-.result-card {
+  padding:30px 20px;
 
-  display: none;
+  border:1px solid rgba(202,196,155,.85);
 
-  padding: 30px 22px;
+  border-radius:22px;
 
-  border: 1px solid #d9d4af;
+  background:rgba(255,253,247,.94);
 
-  border-radius: 22px;
+  box-shadow:0 10px 25px rgba(74,69,45,.09);
 
-  background: rgba(255, 253, 247, .94);
-
-  box-shadow:
-
-    0 10px 25px rgba(90, 80, 60, .07);
-
-  animation: cardAppear .55s ease;
+  animation:cardAppear .45s ease;
 
 }
 
-@keyframes cardAppear {
+@keyframes cardAppear{
 
-  from {
+  from{
 
-    opacity: 0;
+    opacity:0;
 
-    transform: translateY(12px);
+    transform:translateY(10px);
 
   }
 
-  to {
+  to{
 
-    opacity: 1;
+    opacity:1;
 
-    transform: translateY(0);
+    transform:translateY(0);
 
   }
 
 }
 
-.card-title {
+.card-title{
 
-  margin-bottom: 22px;
+  font-size:19px;
 
-  font-size: 18px;
+  font-weight:650;
 
-  font-weight: 600;
+  color:#707b56;
 
-  color: #707b56;
-
-  letter-spacing: .5px;
+  margin-bottom:20px;
 
 }
 
-.card-text {
+.card-text{
 
-  white-space: pre-line;
+  white-space:pre-line;
 
-  font-size: 18px;
+  font-size:18px;
 
-  line-height: 1.95;
+  line-height:1.95;
 
-  color: #464a3d;
-
-}
-
-.card-star {
-
-  margin-top: 20px;
-
-  color: #caa03d;
-
-  font-size: 17px;
+  color:#464b3f;
 
 }
 
-/* ===== 首次限定 ===== */
+.card-star{
 
-.first-note {
+  font-size:17px;
 
-  font-size: 13px;
-
-  line-height: 1.8;
-
-  color: #8a8977;
-
-  margin-top: 26px;
-
-  margin-bottom: 5px;
+  margin-top:18px;
 
 }
 
-/* ===== 雙倍卡 ===== */
+.first-note{
 
-.double-area {
+  font-size:13px;
 
-  display: none;
+  line-height:1.8;
 
-  margin-top: 25px;
+  color:#858473;
 
-}
-
-.double-caption {
-
-  font-size: 14px;
-
-  color: #81876e;
-
-  margin-bottom: 18px;
+  margin:24px 0 0;
 
 }
 
-.mini-card {
+.double-area{
 
-  margin-top: 15px;
-
-  padding: 22px 18px;
-
-  border-radius: 18px;
-
-  border: 1px solid #ded9ba;
-
-  background: rgba(255,255,251,.9);
-
-  text-align: left;
+  margin-top:24px;
 
 }
 
-.mini-title {
+.double-caption{
 
-  margin-bottom: 10px;
+  font-size:14px;
 
-  font-size: 16px;
+  line-height:1.7;
 
-  font-weight: 600;
+  color:#717964;
 
-  color: #747f59;
-
-}
-
-.mini-text {
-
-  white-space: pre-line;
-
-  font-size: 16px;
-
-  line-height: 1.8;
-
-  color: #4d5044;
+  margin-bottom:14px;
 
 }
 
-/* ===== 結束頁 ===== */
+.mini-card{
 
-.end-star {
+  position:relative;
 
-  font-size: 30px;
+  overflow:hidden;
 
-  color: #c89e3b;
+  margin-top:14px;
 
-  margin-bottom: 20px;
+  border-radius:18px;
 
-}
+  border:1px solid rgba(214,207,168,.9);
 
-.end-title {
+  min-height:230px;
 
-  font-family: Georgia, "Times New Roman", serif;
+  display:flex;
 
-  font-size: 22px;
+  align-items:center;
 
-  color: #555b47;
-
-  margin-bottom: 22px;
+  justify-content:center;
 
 }
 
-.end-text {
+.mini-bg{
 
-  font-size: 17px;
+  position:absolute;
 
-  line-height: 2;
+  inset:0;
 
-  color: #666958;
+  background-image:url("cities-sprite.jpg");
+
+  background-repeat:no-repeat;
 
 }
 
-/* ===== 小螢幕 ===== */
+.mini-veil{
 
-@media (max-width: 390px) {
+  position:absolute;
 
-  .panel {
+  inset:0;
 
-    padding: 36px 20px 30px;
+  background:rgba(255,252,244,.76);
+
+}
+
+.mini-content{
+
+  position:relative;
+
+  z-index:2;
+
+  padding:23px 18px;
+
+}
+
+.mini-title{
+
+  font-size:16px;
+
+  font-weight:650;
+
+  color:#6f7956;
+
+  margin-bottom:10px;
+
+}
+
+.mini-text{
+
+  white-space:pre-line;
+
+  font-size:16px;
+
+  line-height:1.78;
+
+  color:#4c5044;
+
+}
+
+.end-star{
+
+  font-size:29px;
+
+  margin-bottom:20px;
+
+}
+
+.end-title{
+
+  font-family:Georgia,"Times New Roman",serif;
+
+  font-size:22px;
+
+  margin-bottom:20px;
+
+  color:#555b47;
+
+}
+
+.end-text{
+
+  font-size:17px;
+
+  line-height:2;
+
+  color:#636755;
+
+}
+
+.back-btn{
+
+  font-size:14px;
+
+  background:transparent;
+
+  color:#858a76;
+
+  text-decoration:underline;
+
+  text-underline-offset:3px;
+
+  margin-top:22px;
+
+  padding:8px 10px;
+
+}
+
+.small-hint{
+
+  font-size:12px;
+
+  line-height:1.65;
+
+  color:#8a8c7e;
+
+  margin-top:14px;
+
+}
+
+@media(max-width:390px){
+
+  .panel{
+
+    padding:34px 20px 28px;
 
   }
 
-  h1 {
+  h1{
 
-    font-size: 25px;
-
-  }
-
-  .intro {
-
-    font-size: 17px;
+    font-size:25px;
 
   }
 
-  .card-text {
+  .intro,
 
-    font-size: 17px;
+  .card-text{
+
+    font-size:17px;
 
   }
 
@@ -610,533 +634,377 @@ button:active {
 
 <body>
 
-<!-- 亞洲地標淡背景 -->
+<div id="bgPhoto"></div>
 
-<div class="landmark-wrap">
-
-  <div id="landmarkArt" class="landmark-art"></div>
-
-</div>
+<div id="bgVeil"></div>
 
 <div class="page">
 
-  <div class="shell">
+<div class="shell">
 
-    <div class="panel">
+<div class="panel">
 
-      <!-- 首頁 -->
+<section id="homeScreen">
 
-      <section id="homeScreen">
+  <div class="main-star">✦</div>
 
-        <div class="main-star">✦</div>
+  <h1>LITTLE HAPPINESS</h1>
 
-        <h1>LITTLE HAPPINESS</h1>
+  <p class="intro">
 
-        <p class="intro">
+    如果今天剛好少了一點開心，<br>
 
-          如果今天剛好少了一點開心，<br>
+    就從這裡抽一個吧。
 
-          就從這裡抽一個吧。
+  </p>
 
-        </p>
+  <button class="primary-btn" onclick="startDraw()">
 
-        <button
+    抽一個小開心 ✦
 
-          class="primary-btn"
+  </button>
 
-          onclick="startDraw()"
+</section>
 
-        >
+<section id="flightScreen" class="flight-screen">
 
-          抽一個小開心 ✦
+  <svg class="flight-route" viewBox="0 0 300 160">
 
-        </button>
+    <path
 
-      </section>
+      class="route-line"
 
-      <!-- 飛機動畫 -->
+      d="M35 125 C90 70,185 95,270 32"
 
-      <section id="flightScreen" class="flight-screen">
+    />
 
-        <svg
+  </svg>
 
-          class="flight-route"
+  <div class="plane">✈︎</div>
 
-          viewBox="0 0 300 160"
+  <div class="flight-text">
 
-        >
+    正在準備今天的小開心…
 
-          <path
+  </div>
 
-            class="route-line"
+</section>
 
-            d="M35 125 C90 70, 185 95, 270 32"
+<section id="resultScreen" class="hidden">
 
-          />
+  <div id="resultCard" class="result-card">
 
-        </svg>
+    <div id="cardTitle" class="card-title"></div>
 
-        <div class="plane">✈︎</div>
+    <div id="cardText" class="card-text"></div>
 
-        <div class="flight-text">
+    <div class="card-star">✦</div>
 
-          正在準備今天的小開心…
+  </div>
 
-        </div>
+  <button
 
-      </section>
+    id="acceptButton"
 
-      <!-- 一般卡片 -->
+    class="secondary-btn hidden"
 
-      <section id="resultScreen" class="hidden">
+    onclick="finishDraw()"
 
-        <div id="resultCard" class="result-card">
+  >
 
-          <div
+    收下這份小開心 ✦
 
-            id="cardTitle"
+  </button>
 
-            class="card-title"
+  <div id="firstInfo" class="hidden">
 
-          ></div>
+    <p class="first-note">
 
-          <div
+      按下「我知道了」後，<br>
 
-            id="cardText"
+      後續再掃 QR Code，<br>
 
-            class="card-text"
+      就開始正式抽卡囉！
 
-          ></div>
+    </p>
 
-          <div class="card-star">
+    <button
 
-            ✦
+      class="secondary-btn"
 
-          </div>
+      onclick="confirmFirstCard()"
 
-        </div>
+    >
 
-        <!-- 一般收下 -->
+      我知道了 ✦
 
-        <button
+    </button>
 
-          id="acceptButton"
+  </div>
 
-          class="secondary-btn hidden"
+  <button
 
-          onclick="finishDraw()"
+    id="retryButton"
 
-        >
+    class="secondary-btn hidden"
 
-          收下這份小開心 ✦
+    onclick="drawExtraCard()"
 
-        </button>
+  >
 
-        <!-- 首次限定按鈕 -->
+    再抽一次 🎲
 
-        <div
+  </button>
 
-          id="firstInfo"
+  <button
 
-          class="hidden"
+    id="doubleButton"
 
-        >
+    class="secondary-btn hidden"
 
-          <p class="first-note">
+    onclick="drawDoubleCards()"
 
-            按下「我知道了」後，<br>
+  >
 
-            後續再掃 QR Code，<br>
+    再抽兩張 ✦✦
 
-            就開始正式抽卡囉！
+  </button>
 
-          </p>
+  <div id="doubleArea" class="double-area hidden">
 
-          <button
+    <div class="double-caption">
 
-            class="secondary-btn"
+      今天多給妳兩個選擇，<br>
 
-            onclick="confirmFirstCard()"
-
-          >
-
-            我知道了 ✦
-
-          </button>
-
-        </div>
-
-        <!-- 再抽一次 -->
-
-        <button
-
-          id="retryButton"
-
-          class="secondary-btn hidden"
-
-          onclick="drawExtraCard()"
-
-        >
-
-          再抽一次 🎲
-
-        </button>
-
-        <!-- 雙倍 -->
-
-        <button
-
-          id="doubleButton"
-
-          class="secondary-btn hidden"
-
-          onclick="drawDoubleCards()"
-
-        >
-
-          再抽兩張 ✦✦
-
-        </button>
-
-        <div
-
-          id="doubleArea"
-
-          class="double-area"
-
-        >
-
-          <div class="double-caption">
-
-            今天多給妳兩個選擇，<br>
-
-            挑一張比較喜歡的吧。
-
-          </div>
-
-          <div class="mini-card">
-
-            <div
-
-              id="doubleTitle1"
-
-              class="mini-title"
-
-            ></div>
-
-            <div
-
-              id="doubleText1"
-
-              class="mini-text"
-
-            ></div>
-
-          </div>
-
-          <div class="mini-card">
-
-            <div
-
-              id="doubleTitle2"
-
-              class="mini-title"
-
-            ></div>
-
-            <div
-
-              id="doubleText2"
-
-              class="mini-text"
-
-            ></div>
-
-          </div>
-
-          <button
-
-            class="secondary-btn"
-
-            onclick="finishDraw()"
-
-          >
-
-            收下今天的小開心 ✦
-
-          </button>
-
-        </div>
-
-      </section>
-
-      <!-- 結束頁 -->
-
-      <section id="endScreen" class="hidden">
-
-        <div class="end-star">
-
-          ✦
-
-        </div>
-
-        <div class="end-title">
-
-          今天的小開心已送達
-
-        </div>
-
-        <div class="end-text">
-
-          希望有讓今天<br>
-
-          多一點點開心。<br><br>
-
-          下次想起來的時候，<br>
-
-          再來吧。
-
-        </div>
-
-      </section>
+      挑一張比較喜歡的吧。
 
     </div>
 
+    <div class="mini-card">
+
+      <div id="miniBg1" class="mini-bg"></div>
+
+      <div class="mini-veil"></div>
+
+      <div class="mini-content">
+
+        <div
+
+          id="doubleTitle1"
+
+          class="mini-title"
+
+        ></div>
+
+        <div
+
+          id="doubleText1"
+
+          class="mini-text"
+
+        ></div>
+
+      </div>
+
+    </div>
+
+    <div class="mini-card">
+
+      <div id="miniBg2" class="mini-bg"></div>
+
+      <div class="mini-veil"></div>
+
+      <div class="mini-content">
+
+        <div
+
+          id="doubleTitle2"
+
+          class="mini-title"
+
+        ></div>
+
+        <div
+
+          id="doubleText2"
+
+          class="mini-text"
+
+        ></div>
+
+      </div>
+
+    </div>
+
+    <p class="small-hint">
+
+      想用其中一張的話，記得先截圖。
+
+    </p>
+
+    <button
+
+      class="secondary-btn"
+
+      onclick="finishDraw()"
+
+    >
+
+      收下今天的小開心 ✦
+
+    </button>
+
   </div>
+
+</section>
+
+<section id="endScreen" class="hidden">
+
+  <div class="end-star">✦</div>
+
+  <div id="endTitle" class="end-title">
+
+    今天的小開心已送達
+
+  </div>
+
+  <div id="endText" class="end-text"></div>
+
+  <button
+
+    id="backToLastButton"
+
+    class="back-btn hidden"
+
+    onclick="restoreLastView()"
+
+  >
+
+    等等，我還沒截圖 😂
+
+  </button>
+
+</section>
+
+</div>
+
+</div>
 
 </div>
 
 <script>
 
-/* =====================================================
+/* =========================
 
-   亞洲城市地標背景
+   圖片
 
-===================================================== */
+========================= */
 
-const landmarks = [
+const HOME_BG = "home-flight.jpg";
 
-`
+const SPRITE_BG = "cities-sprite.jpg";
 
-<svg viewBox="0 0 500 240">
+/*
 
-  <!-- 東京鐵塔 -->
+  cities-sprite.jpg
 
-  <g fill="none" stroke="currentColor" stroke-width="2">
+  3 欄 × 5 列
 
-    <path d="M250 20 L205 215" />
+  0 東京
 
-    <path d="M250 20 L295 215" />
+  1 京都
 
-    <path d="M223 105 L277 105" />
+  2 首爾
 
-    <path d="M213 148 L287 148" />
+  3 大阪
 
-    <path d="M198 215 L302 215" />
+  4 香港
 
-    <path d="M235 65 L265 65" />
+  5 台北
 
-  </g>
+  6 澳門
 
-</svg>
+  7 釜山
 
-`,
+  8 清邁
 
-`
+  9 新加坡
 
-<svg viewBox="0 0 500 240">
+  10 吉隆坡
 
-  <!-- 台北101 -->
+  11 曼谷
 
-  <g fill="none" stroke="currentColor" stroke-width="2">
+  12 河內
 
-    <path d="M245 20 L255 20 L255 42 L265 42" />
+  13 峴港
 
-    <path d="M235 45 L265 45 L271 68 L229 68 Z" />
+  14 峇里島
 
-    <path d="M228 72 L272 72 L278 96 L222 96 Z" />
+*/
 
-    <path d="M220 100 L280 100 L286 126 L214 126 Z" />
+const cityPositions = [
 
-    <path d="M212 130 L288 130 L294 158 L206 158 Z" />
+  {name:"東京",x:0,y:0},
 
-    <path d="M205 162 L295 162 L302 215 L198 215 Z" />
+  {name:"京都",x:50,y:0},
 
-  </g>
+  {name:"首爾",x:100,y:0},
 
-</svg>
+  {name:"大阪",x:0,y:25},
 
-`,
+  {name:"香港",x:50,y:25},
 
-`
+  {name:"台北",x:100,y:25},
 
-<svg viewBox="0 0 500 240">
+  {name:"澳門",x:0,y:50},
 
-  <!-- 首爾南山塔 -->
+  {name:"釜山",x:50,y:50},
 
-  <g fill="none" stroke="currentColor" stroke-width="2">
+  {name:"清邁",x:100,y:50},
 
-    <path d="M250 25 L250 210" />
+  {name:"新加坡",x:0,y:75},
 
-    <path d="M238 78 L262 78" />
+  {name:"吉隆坡",x:50,y:75},
 
-    <ellipse cx="250" cy="92" rx="24" ry="10"/>
+  {name:"曼谷",x:100,y:75},
 
-    <path d="M232 102 L268 102" />
+  {name:"河內",x:0,y:100},
 
-    <path d="M240 105 L225 210" />
+  {name:"峴港",x:50,y:100},
 
-    <path d="M260 105 L275 210" />
-
-    <path d="M215 210 L285 210" />
-
-  </g>
-
-</svg>
-
-`,
-
-`
-
-<svg viewBox="0 0 500 240">
-
-  <!-- 新加坡濱海灣 -->
-
-  <g fill="none" stroke="currentColor" stroke-width="2">
-
-    <rect x="140" y="90" width="45" height="125" rx="4"/>
-
-    <rect x="228" y="90" width="45" height="125" rx="4"/>
-
-    <rect x="315" y="90" width="45" height="125" rx="4"/>
-
-    <path d="M130 83 Q250 45 370 83" />
-
-    <path d="M145 78 Q250 55 355 78" />
-
-  </g>
-
-</svg>
-
-`,
-
-`
-
-<svg viewBox="0 0 500 240">
-
-  <!-- 香港天際線 -->
-
-  <g fill="none" stroke="currentColor" stroke-width="2">
-
-    <path d="M50 215 L50 135 L95 135 L95 215" />
-
-    <path d="M110 215 L110 95 L145 95 L145 215" />
-
-    <path d="M165 215 L165 120 L205 120 L205 215" />
-
-    <path d="M225 215 L225 65 L260 65 L260 215" />
-
-    <path d="M277 215 L277 105 L318 105 L318 215" />
-
-    <path d="M340 215 L340 128 L385 128 L385 215" />
-
-    <path d="M405 215 L405 88 L438 88 L438 215" />
-
-    <path d="M30 215 L465 215" />
-
-  </g>
-
-</svg>
-
-`,
-
-`
-
-<svg viewBox="0 0 500 240">
-
-  <!-- 曼谷寺廟 -->
-
-  <g fill="none" stroke="currentColor" stroke-width="2">
-
-    <path d="M250 28 L230 80 L270 80 Z" />
-
-    <path d="M250 55 L210 118 L290 118 Z" />
-
-    <path d="M250 85 L185 158 L315 158 Z" />
-
-    <rect x="198" y="160" width="104" height="55"/>
-
-    <path d="M175 215 L325 215" />
-
-  </g>
-
-</svg>
-
-`
+  {name:"峇里島",x:100,y:100}
 
 ];
 
-let currentLandmark = -1;
+/* =========================
 
-function changeLandmark() {
+   15 張正式卡
 
-  let index;
-
-  do {
-
-    index = Math.floor(
-
-      Math.random() * landmarks.length
-
-    );
-
-  }
-
-  while (
-
-    landmarks.length > 1 &&
-
-    index === currentLandmark
-
-  );
-
-  currentLandmark = index;
-
-  document.getElementById(
-
-    "landmarkArt"
-
-  ).innerHTML = landmarks[index];
-
-}
-
-/* =====================================================
-
-   15張正式卡
-
-===================================================== */
+========================= */
 
 const cards = [
 
-  {
+{
 
-    title: "🎉 今天有中！",
+  title:"🎉 今天有中！",
 
-    text:
+  text:
 
 `能量補給送給妳。
 
 7-ELEVEN 100元數位商品禮券。`,
 
-    type: "normal"
+  type:"normal",
 
-  },
+  city:0
 
-  {
+},
 
-    title: "隱藏款 ✦",
+{
 
-    text:
+  title:"隱藏款 ✦",
+
+  text:
 
 `欸，居然被妳抽到了。
 
@@ -1144,15 +1012,17 @@ const cards = [
 
 （我做得到的範圍內都可）`,
 
-    type: "normal"
+  type:"normal",
 
-  },
+  city:1
 
-  {
+},
 
-    title: "小兜風 🚗",
+{
 
-    text:
+  title:"小兜風 🚗",
+
+  text:
 
 `走，不管現在多晚。
 
@@ -1162,15 +1032,17 @@ const cards = [
 
 想用的時候，截圖給我。`,
 
-    type: "normal"
+  type:"normal",
 
-  },
+  city:2
 
-  {
+},
 
-    title: "餐點 🍽️",
+{
 
-    text:
+  title:"餐點 🍽️",
+
+  text:
 
 `不想煩惱吃什麼的話，
 
@@ -1178,61 +1050,67 @@ const cards = [
 
 找個時間帶妳去吃。`,
 
-    type: "normal"
+  type:"normal",
 
-  },
+  city:3
 
-  {
+},
 
-    title: "神秘款 😎",
+{
 
-    text:
+  title:"神秘款 😎",
+
+  text:
 
 `這張先截圖傳給我。
 
 其他的先不告訴妳。`,
 
-    type: "normal"
+  type:"normal",
 
-  },
+  city:4
 
-  {
+},
 
-    title: "飲料我請 🥤",
+{
 
-    text:
+  title:"飲料我請 🥤",
+
+  text:
 
 `想喝什麼就選什麼。
 
 截圖給我，這杯算我的。`,
 
-    type: "normal"
+  type:"normal",
 
-  },
+  city:5
 
-  {
+},
 
-    title: "👑 任性額度 +1",
+{
 
-    text:
+  title:"👑 任性額度 +1",
+
+  text:
 
 `恭喜獲得今日限定權限：
 
-可以有一件事情
-
-「我爽就好」。
+可以有一件事情「我爽就好」。
 
 請合理使用 😂`,
 
-    type: "normal"
+  type:"normal",
 
-  },
+  city:6
 
-  {
+},
 
-    title: "彩蛋 😂",
+{
 
-    text:
+  title:"彩蛋 😂",
+
+  text:
 
 `恭喜，什麼都沒抽到。
 
@@ -1240,51 +1118,53 @@ const cards = [
 
 妳今天應該自己就會遇到好事。`,
 
-    type: "normal"
+  type:"normal",
 
-  },
+  city:7
 
-  {
+},
 
-    title: "抱怨接收券 😤",
+{
 
-    text:
+  title:"抱怨接收券 😤",
 
-`今天很煩的話，
+  text:
 
-把這張傳給我。
+`今天很煩的話，把這張傳給我。
 
 妳講，我聽。
 
 不一定要找答案。`,
 
-    type: "normal"
+  type:"normal",
 
-  },
+  city:8
 
-  {
+},
 
-    title: "今天的小幸運 ✦",
+{
 
-    text:
+  title:"今天的小幸運 ✦",
+
+  text:
 
 `能抽到這張，
 
 本身就算今天的一件小幸運。
 
-截圖給我，
+截圖給我，可以點一首歌。🎵`,
 
-可以點一首歌。🎵`,
+  type:"normal",
 
-    type: "normal"
+  city:9
 
-  },
+},
 
-  {
+{
 
-    title: "再抽一次 🎲",
+  title:"再抽一次 🎲",
 
-    text:
+  text:
 
 `嗯……
 
@@ -1294,15 +1174,17 @@ const cards = [
 
 再給妳一次機會。`,
 
-    type: "retry"
+  type:"retry",
 
-  },
+  city:10
 
-  {
+},
 
-    title: "今天值得一個小獎勵 🎁",
+{
 
-    text:
+  title:"今天值得一個小獎勵 🎁",
+
+  text:
 
 `沒有原因也沒關係。
 
@@ -1310,15 +1192,17 @@ const cards = [
 
 上蝦皮挑個喜歡的小東西吧。`,
 
-    type: "normal"
+  type:"normal",
 
-  },
+  city:11
 
-  {
+},
 
-    title: "明天的早餐升級 🍳",
+{
 
-    text:
+  title:"明天的早餐升級 🍳",
+
+  text:
 
 `明天第一餐不要隨便。
 
@@ -1326,15 +1210,17 @@ const cards = [
 
 早餐我來處理。`,
 
-    type: "normal"
+  type:"normal",
 
-  },
+  city:12
 
-  {
+},
 
-    title: "雙倍小開心 ✦✦",
+{
 
-    text:
+  title:"雙倍小開心 ✦✦",
+
+  text:
 
 `今天好像需要多一點。
 
@@ -1344,15 +1230,17 @@ const cards = [
 
 截圖給我。`,
 
-    type: "double"
+  type:"double",
 
-  },
+  city:13
 
-  {
+},
 
-    title: "週末逃跑計畫 🚗",
+{
 
-    text:
+  title:"週末逃跑計畫 🚗",
+
+  text:
 
 `最近如果有點悶，
 
@@ -1362,21 +1250,23 @@ const cards = [
 
 去哪裡之後再決定。`,
 
-    type: "normal"
+  type:"normal",
 
-  }
+  city:14
+
+}
 
 ];
 
-/* =====================================================
+/* =========================
 
-   首次限定卡
+   首次限定
 
-===================================================== */
+========================= */
 
 const firstCard = {
 
-  title: "首次限定 ✦",
+  title:"首次限定 ✦",
 
   text:
 
@@ -1394,35 +1284,169 @@ const firstCard = {
 
 };
 
-/* =====================================================
+/* =========================
 
-   localStorage
+   儲存紀錄
 
-===================================================== */
+========================= */
 
 const KEY_FIRST =
 
-  "littleHappiness_firstSeen_v2";
+  "littleHappiness_firstSeen_v3";
 
 const KEY_DECK =
 
-  "littleHappiness_remaining_v2";
+  "littleHappiness_remaining_v3";
 
 const KEY_LAST =
 
-  "littleHappiness_lastCard_v2";
+  "littleHappiness_lastCard_v3";
 
-/* =====================================================
+let currentView = null;
+
+let lastBackground = null;
+
+/* =========================
+
+   首頁背景
+
+========================= */
+
+function setHomeBackground(){
+
+  const bg =
+
+    document.getElementById("bgPhoto");
+
+  bg.style.backgroundImage =
+
+    `url("${HOME_BG}")`;
+
+  bg.style.backgroundSize =
+
+    "cover";
+
+  bg.style.backgroundPosition =
+
+    "center";
+
+  document
+
+    .getElementById("bgVeil")
+
+    .style.background =
+
+      "linear-gradient(" +
+
+      "180deg," +
+
+      "rgba(255,250,247,.40)," +
+
+      "rgba(250,248,231,.55)" +
+
+      ")";
+
+}
+
+/* =========================
+
+   城市背景
+
+========================= */
+
+function setCityBackground(cityIndex){
+
+  const p =
+
+    cityPositions[cityIndex];
+
+  const bg =
+
+    document.getElementById("bgPhoto");
+
+  bg.style.backgroundImage =
+
+    `url("${SPRITE_BG}")`;
+
+  bg.style.backgroundSize =
+
+    "300% 500%";
+
+  bg.style.backgroundPosition =
+
+    `${p.x}% ${p.y}%`;
+
+  /*
+
+    城市背景故意調淡，
+
+    讓文字卡片是主角。
+
+  */
+
+  document
+
+    .getElementById("bgVeil")
+
+    .style.background =
+
+      "linear-gradient(" +
+
+      "180deg," +
+
+      "rgba(255,250,247,.54)," +
+
+      "rgba(250,248,231,.64)" +
+
+      ")";
+
+  lastBackground =
+
+    cityIndex;
+
+}
+
+/* =========================
+
+   二選一小卡背景
+
+========================= */
+
+function setMiniBackground(
+
+  element,
+
+  cityIndex
+
+){
+
+  const p =
+
+    cityPositions[cityIndex];
+
+  element.style.backgroundSize =
+
+    "300% 500%";
+
+  element.style.backgroundPosition =
+
+    `${p.x}% ${p.y}%`;
+
+}
+
+/* =========================
 
    洗牌
 
-===================================================== */
+========================= */
 
-function shuffle(array) {
+function shuffle(array){
 
-  const arr = [...array];
+  const arr =
 
-  for (
+    [...array];
+
+  for(
 
     let i = arr.length - 1;
 
@@ -1430,17 +1454,33 @@ function shuffle(array) {
 
     i--
 
-  ) {
+  ){
 
-    const j = Math.floor(
+    const j =
 
-      Math.random() * (i + 1)
+      Math.floor(
 
-    );
+        Math.random() *
 
-    [arr[i], arr[j]] =
+        (i + 1)
 
-      [arr[j], arr[i]];
+      );
+
+    [
+
+      arr[i],
+
+      arr[j]
+
+    ] =
+
+    [
+
+      arr[j],
+
+      arr[i]
+
+    ];
 
   }
 
@@ -1448,33 +1488,43 @@ function shuffle(array) {
 
 }
 
-/* =====================================================
+/* =========================
 
-   建立新一輪卡池
+   建立新的一輪
 
-===================================================== */
+========================= */
 
-function createFreshDeck() {
+function createFreshDeck(){
 
   let indexes =
 
-    cards.map((_, index) => index);
+    shuffle(
 
-  indexes = shuffle(indexes);
+      cards.map(
+
+        (_,index) => index
+
+      )
+
+    );
 
   const last =
 
-    localStorage.getItem(KEY_LAST);
+    localStorage.getItem(
+
+      KEY_LAST
+
+    );
 
   /*
 
-     避免上一輪最後一張
+    避免上一輪最後一張，
 
-     馬上成為下一輪第一張
+    馬上又成為下一輪第一張。
 
   */
 
-  if (
+  if(
 
     last !== null &&
 
@@ -1482,13 +1532,23 @@ function createFreshDeck() {
 
     indexes[0] === Number(last)
 
-  ) {
+  ){
 
-    const temp = indexes[0];
+    [
 
-    indexes[0] = indexes[1];
+      indexes[0],
 
-    indexes[1] = temp;
+      indexes[1]
+
+    ] =
+
+    [
+
+      indexes[1],
+
+      indexes[0]
+
+    ];
 
   }
 
@@ -1504,45 +1564,55 @@ function createFreshDeck() {
 
 }
 
-/* =====================================================
+/* =========================
 
-   從尚未出現過的卡抽一張
+   抽一張
 
-===================================================== */
+========================= */
 
-function takeOneCard() {
+function takeOneCard(){
 
   let deck;
 
-  try {
+  try{
 
-    deck = JSON.parse(
+    deck =
 
-      localStorage.getItem(KEY_DECK)
+      JSON.parse(
 
-    );
+        localStorage.getItem(
+
+          KEY_DECK
+
+        )
+
+      );
 
   }
 
-  catch {
+  catch(e){
 
     deck = null;
 
   }
 
-  if (
+  if(
 
     !Array.isArray(deck) ||
 
     deck.length === 0
 
-  ) {
+  ){
 
-    deck = createFreshDeck();
+    deck =
+
+      createFreshDeck();
 
   }
 
-  const index = deck.shift();
+  const index =
+
+    deck.shift();
 
   localStorage.setItem(
 
@@ -1556,27 +1626,27 @@ function takeOneCard() {
 
     KEY_LAST,
 
-    index.toString()
+    String(index)
 
   );
 
   return {
 
-    index,
+    index:index,
 
-    card: cards[index]
+    card:cards[index]
 
   };
 
 }
 
-/* =====================================================
+/* =========================
 
-   畫面切換
+   畫面控制
 
-===================================================== */
+========================= */
 
-function hideAll() {
+function hideAll(){
 
   document
 
@@ -1588,7 +1658,9 @@ function hideAll() {
 
     .getElementById("flightScreen")
 
-    .style.display = "none";
+    .style.display =
+
+      "none";
 
   document
 
@@ -1604,49 +1676,45 @@ function hideAll() {
 
 }
 
-function resetCardButtons() {
+function resetActions(){
 
-  document
+  [
 
-    .getElementById("acceptButton")
+    "acceptButton",
 
-    .classList.add("hidden");
+    "retryButton",
 
-  document
+    "doubleButton",
 
-    .getElementById("retryButton")
+    "firstInfo",
 
-    .classList.add("hidden");
+    "doubleArea"
 
-  document
+  ]
 
-    .getElementById("doubleButton")
+  .forEach(
 
-    .classList.add("hidden");
+    id => {
 
-  document
+      document
 
-    .getElementById("firstInfo")
+        .getElementById(id)
 
-    .classList.add("hidden");
+        .classList.add("hidden");
 
-  document
+    }
 
-    .getElementById("doubleArea")
-
-    .style.display = "none";
+  );
 
 }
 
-/* =====================================================
+/* =========================
 
-   開始抽卡
+   飛機動畫
 
-===================================================== */
+========================= */
 
-function startDraw() {
-
-  changeLandmark();
+function startFlight(callback){
 
   hideAll();
 
@@ -1658,75 +1726,105 @@ function startDraw() {
 
     );
 
-  flight.style.display = "flex";
+  flight.style.display =
 
-  /*
-
-    重新觸發飛機動畫
-
-  */
+    "flex";
 
   const plane =
 
-    flight.querySelector(".plane");
+    flight.querySelector(
 
-  plane.style.animation = "none";
+      ".plane"
+
+    );
+
+  plane.style.animation =
+
+    "none";
 
   void plane.offsetWidth;
 
   plane.style.animation =
 
-    "flyPlane 1.35s cubic-bezier(.25,.6,.35,1) forwards";
+    "flyPlane 1.35s " +
 
-  setTimeout(() => {
+    "cubic-bezier(.25,.6,.35,1) " +
 
-    flight.style.display = "none";
+    "forwards";
 
-    const firstSeen =
+  setTimeout(
 
-      localStorage.getItem(
+    () => {
 
-        KEY_FIRST
+      flight.style.display =
 
-      );
+        "none";
 
-    if (!firstSeen) {
+      callback();
 
-      showFirstCard();
+    },
 
-    }
+    1400
 
-    else {
-
-      drawOfficialCard();
-
-    }
-
-  }, 1400);
+  );
 
 }
 
-/* =====================================================
+/* =========================
+
+   首頁抽卡
+
+========================= */
+
+function startDraw(){
+
+  startFlight(
+
+    () => {
+
+      if(
+
+        !localStorage.getItem(
+
+          KEY_FIRST
+
+        )
+
+      ){
+
+        showFirstCard();
+
+      }
+
+      else{
+
+        drawOfficialCard();
+
+      }
+
+    }
+
+  );
+
+}
+
+/* =========================
 
    第一次限定
 
-===================================================== */
+========================= */
 
-function showFirstCard() {
+function showFirstCard(){
 
-  resetCardButtons();
+  resetActions();
+
+  setHomeBackground();
 
   document
 
     .getElementById("resultScreen")
 
     .classList.remove("hidden");
-
-  document
-
-    .getElementById("resultCard")
-
-    .style.display = "block";
 
   document
 
@@ -1750,9 +1848,19 @@ function showFirstCard() {
 
     .classList.remove("hidden");
 
+  currentView =
+
+    null;
+
 }
 
-function confirmFirstCard() {
+/* =========================
+
+   首次限定：我知道了
+
+========================= */
+
+function confirmFirstCard(){
 
   localStorage.setItem(
 
@@ -1764,6 +1872,8 @@ function confirmFirstCard() {
 
   hideAll();
 
+  setHomeBackground();
+
   document
 
     .getElementById("endScreen")
@@ -1772,7 +1882,7 @@ function confirmFirstCard() {
 
   document
 
-    .querySelector(".end-title")
+    .getElementById("endTitle")
 
     .innerText =
 
@@ -1780,53 +1890,75 @@ function confirmFirstCard() {
 
   document
 
-    .querySelector(".end-text")
+    .getElementById("endText")
 
     .innerHTML =
 
-`下次再掃 QR Code，<br>
+      "下次再掃 QR Code，<br>" +
 
-就開始正式抽卡囉！`;
+      "就開始正式抽卡囉！";
+
+  document
+
+    .getElementById("backToLastButton")
+
+    .classList.add("hidden");
 
 }
 
-/* =====================================================
+/* =========================
 
    正式抽卡
 
-===================================================== */
+========================= */
 
-function drawOfficialCard() {
+function drawOfficialCard(){
 
-  resetCardButtons();
+  const result =
 
-  const result = takeOneCard();
+    takeOneCard();
 
-  showCard(result.card);
+  showCard(
+
+    result.index,
+
+    result.card,
+
+    true
+
+  );
 
 }
 
-/* =====================================================
+/* =========================
 
-   顯示一張卡
+   顯示卡片
 
-===================================================== */
+========================= */
 
-function showCard(card) {
+function showCard(
 
-  resetCardButtons();
+  index,
+
+  card,
+
+  saveView
+
+){
+
+  resetActions();
+
+  setCityBackground(
+
+    card.city
+
+  );
 
   document
 
     .getElementById("resultScreen")
 
     .classList.remove("hidden");
-
-  document
-
-    .getElementById("resultCard")
-
-    .style.display = "block";
 
   document
 
@@ -1844,11 +1976,11 @@ function showCard(card) {
 
       card.text;
 
-  if (
+  if(
 
     card.type === "retry"
 
-  ) {
+  ){
 
     document
 
@@ -1858,11 +1990,11 @@ function showCard(card) {
 
   }
 
-  else if (
+  else if(
 
     card.type === "double"
 
-  ) {
+  ){
 
     document
 
@@ -1872,7 +2004,7 @@ function showCard(card) {
 
   }
 
-  else {
+  else{
 
     document
 
@@ -1882,65 +2014,59 @@ function showCard(card) {
 
   }
 
+  if(saveView){
+
+    currentView = {
+
+      kind:"single",
+
+      index:index
+
+    };
+
+  }
+
 }
 
-/* =====================================================
+/* =========================
 
    再抽一次
 
-===================================================== */
+========================= */
 
-function drawExtraCard() {
+function drawExtraCard(){
 
-  changeLandmark();
+  startFlight(
 
-  hideAll();
+    () => {
 
-  const flight =
+      const result =
 
-    document.getElementById(
+        takeOneCard();
 
-      "flightScreen"
+      showCard(
 
-    );
+        result.index,
 
-  flight.style.display = "flex";
+        result.card,
 
-  const plane =
+        true
 
-    flight.querySelector(".plane");
+      );
 
-  plane.style.animation = "none";
+    }
 
-  void plane.offsetWidth;
-
-  plane.style.animation =
-
-    "flyPlane 1.35s cubic-bezier(.25,.6,.35,1) forwards";
-
-  setTimeout(() => {
-
-    flight.style.display = "none";
-
-    const result =
-
-      takeOneCard();
-
-    showCard(result.card);
-
-  }, 1400);
+  );
 
 }
 
-/* =====================================================
+/* =========================
 
    雙倍小開心
 
-===================================================== */
+========================= */
 
-function drawDoubleCards() {
-
-  resetCardButtons();
+function drawDoubleCards(){
 
   const first =
 
@@ -1950,21 +2076,17 @@ function drawDoubleCards() {
 
     takeOneCard();
 
-  const area =
-
-    document.getElementById(
-
-      "doubleArea"
-
-    );
+  resetActions();
 
   document
 
-    .getElementById(
+    .getElementById("doubleArea")
 
-      "doubleTitle1"
+    .classList.remove("hidden");
 
-    )
+  document
+
+    .getElementById("doubleTitle1")
 
     .innerText =
 
@@ -1972,23 +2094,27 @@ function drawDoubleCards() {
 
   document
 
-    .getElementById(
-
-      "doubleText1"
-
-    )
+    .getElementById("doubleText1")
 
     .innerText =
 
       first.card.text;
 
+  setMiniBackground(
+
+    document.getElementById(
+
+      "miniBg1"
+
+    ),
+
+    first.card.city
+
+  );
+
   document
 
-    .getElementById(
-
-      "doubleTitle2"
-
-    )
+    .getElementById("doubleTitle2")
 
     .innerText =
 
@@ -1996,31 +2122,61 @@ function drawDoubleCards() {
 
   document
 
-    .getElementById(
-
-      "doubleText2"
-
-    )
+    .getElementById("doubleText2")
 
     .innerText =
 
       second.card.text;
 
-  area.style.display =
+  setMiniBackground(
 
-    "block";
+    document.getElementById(
+
+      "miniBg2"
+
+    ),
+
+    second.card.city
+
+  );
+
+  currentView = {
+
+    kind:"double",
+
+    first:first.index,
+
+    second:second.index,
+
+    base:lastBackground
+
+  };
 
 }
 
-/* =====================================================
+/* =========================
 
    收下 → 結束
 
-===================================================== */
+========================= */
 
-function finishDraw() {
+function finishDraw(){
 
   hideAll();
+
+  if(
+
+    lastBackground !== null
+
+  ){
+
+    setCityBackground(
+
+      lastBackground
+
+    );
+
+  }
 
   document
 
@@ -2030,7 +2186,7 @@ function finishDraw() {
 
   document
 
-    .querySelector(".end-title")
+    .getElementById("endTitle")
 
     .innerText =
 
@@ -2038,25 +2194,199 @@ function finishDraw() {
 
   document
 
-    .querySelector(".end-text")
+    .getElementById("endText")
 
     .innerHTML =
 
-`希望有讓今天<br>
+      "希望有讓今天<br>" +
 
-多一點點開心。<br><br>
+      "多一點點開心。<br><br>" +
 
-下次想起來的時候，<br>
+      "下次想起來的時候，<br>" +
 
-再來吧。`;
+      "再來吧。";
+
+  if(currentView){
+
+    document
+
+      .getElementById("backToLastButton")
+
+      .classList.remove("hidden");
+
+  }
+
+  else{
+
+    document
+
+      .getElementById("backToLastButton")
+
+      .classList.add("hidden");
+
+  }
 
 }
 
-/* =====================================================
+/* =========================
 
-   網頁載入
+   等等，我還沒截圖
 
-===================================================== */
+========================= */
+
+function restoreLastView(){
+
+  if(
+
+    !currentView
+
+  ){
+
+    return;
+
+  }
+
+  hideAll();
+
+  /* 一般卡 */
+
+  if(
+
+    currentView.kind === "single"
+
+  ){
+
+    const card =
+
+      cards[
+
+        currentView.index
+
+      ];
+
+    showCard(
+
+      currentView.index,
+
+      card,
+
+      false
+
+    );
+
+  }
+
+  /* 雙倍小開心 */
+
+  else if(
+
+    currentView.kind === "double"
+
+  ){
+
+    const card1 =
+
+      cards[
+
+        currentView.first
+
+      ];
+
+    const card2 =
+
+      cards[
+
+        currentView.second
+
+      ];
+
+    setCityBackground(
+
+      currentView.base ??
+
+      card1.city
+
+    );
+
+    document
+
+      .getElementById("resultScreen")
+
+      .classList.remove("hidden");
+
+    resetActions();
+
+    document
+
+      .getElementById("doubleArea")
+
+      .classList.remove("hidden");
+
+    document
+
+      .getElementById("doubleTitle1")
+
+      .innerText =
+
+        card1.title;
+
+    document
+
+      .getElementById("doubleText1")
+
+      .innerText =
+
+        card1.text;
+
+    setMiniBackground(
+
+      document.getElementById(
+
+        "miniBg1"
+
+      ),
+
+      card1.city
+
+    );
+
+    document
+
+      .getElementById("doubleTitle2")
+
+      .innerText =
+
+        card2.title;
+
+    document
+
+      .getElementById("doubleText2")
+
+      .innerText =
+
+        card2.text;
+
+    setMiniBackground(
+
+      document.getElementById(
+
+        "miniBg2"
+
+      ),
+
+      card2.city
+
+    );
+
+  }
+
+}
+
+/* =========================
+
+   網站載入
+
+========================= */
 
 window.addEventListener(
 
@@ -2064,7 +2394,7 @@ window.addEventListener(
 
   () => {
 
-    changeLandmark();
+    setHomeBackground();
 
   }
 
