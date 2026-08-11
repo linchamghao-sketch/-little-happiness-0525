@@ -20,9 +20,9 @@
 
   --line:rgba(154,164,111,.58);
 
-  --paper:rgba(255,253,247,.86);
+  --paper:rgba(255,253,247,.91);
 
-  --paper-strong:rgba(255,253,247,.94);
+  --paper-strong:rgba(255,253,247,.95);
 
   --gold:#c69d39;
 
@@ -60,7 +60,7 @@ html,body{
 
 body{
 
-  min-height:100vh;
+  min-height:100svh;
 
   background:#f7f3e8;
 
@@ -82,9 +82,21 @@ body{
 
   background-size:cover;
 
-  transition:.35s ease;
+  transition:
+
+    opacity .35s ease,
+
+    filter .35s ease;
+
+  filter:
+
+    saturate(1.05)
+
+    contrast(1.03);
 
 }
+
+/* 背景只做輕微淡化 */
 
 #bgVeil{
 
@@ -96,15 +108,17 @@ body{
 
   pointer-events:none;
 
-  background:linear-gradient(
+  background:
 
-    180deg,
+    linear-gradient(
 
-    rgba(255,250,247,.40),
+      180deg,
 
-    rgba(250,248,231,.55)
+      rgba(255,249,245,.22),
 
-  );
+      rgba(249,247,225,.30)
+
+    );
 
 }
 
@@ -114,7 +128,7 @@ body{
 
   z-index:2;
 
-  min-height:100vh;
+  min-height:100svh;
 
   display:flex;
 
@@ -122,7 +136,13 @@ body{
 
   justify-content:center;
 
-  padding:34px 22px calc(44px + env(safe-area-inset-bottom));
+  padding:
+
+    20px
+
+    18px
+
+    calc(24px + env(safe-area-inset-bottom));
 
 }
 
@@ -136,21 +156,31 @@ body{
 
 .panel{
 
-  background:rgba(255,253,247,.87);
+  background:rgba(255,253,247,.91);
 
-  border:1px solid var(--line);
+  border:
 
-  border-radius:28px;
+    1px solid var(--line);
 
-  padding:38px 24px 30px;
+  border-radius:26px;
+
+  padding:
+
+    30px
+
+    22px
+
+    24px;
 
   text-align:center;
 
-  box-shadow:0 18px 46px rgba(70,70,45,.14);
+  box-shadow:
 
-  backdrop-filter:blur(8px);
+    0 16px 38px rgba(70,70,45,.13);
 
-  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(7px);
+
+  -webkit-backdrop-filter:blur(7px);
 
 }
 
@@ -174,15 +204,21 @@ body{
 
   font-size:26px;
 
-  margin-bottom:18px;
+  margin-bottom:16px;
 
 }
 
 h1{
 
-  margin:0 0 34px;
+  margin:0 0 26px;
 
-  font-family:Georgia,"Times New Roman",serif;
+  font-family:
+
+    Georgia,
+
+    "Times New Roman",
+
+    serif;
 
   font-size:28px;
 
@@ -200,7 +236,7 @@ h1{
 
   line-height:2;
 
-  margin:0 auto 32px;
+  margin:0 auto 26px;
 
   color:#55594d;
 
@@ -228,7 +264,9 @@ button{
 
   letter-spacing:.5px;
 
-  transition:transform .12s ease;
+  transition:
+
+    transform .12s ease;
 
 }
 
@@ -242,37 +280,55 @@ button:active{
 
   min-width:230px;
 
-  padding:16px 26px;
+  padding:
+
+    16px
+
+    26px;
 
   background:var(--olive);
 
-  color:#fff;
+  color:white;
 
   font-size:17px;
 
-  box-shadow:0 8px 20px rgba(90,105,62,.18);
+  box-shadow:
+
+    0 8px 20px
+
+    rgba(90,105,62,.18);
 
 }
 
 .secondary-btn{
 
-  margin-top:20px;
+  margin-top:18px;
 
-  padding:13px 23px;
+  padding:
 
-  background:rgba(255,253,247,.76);
+    13px
+
+    23px;
+
+  background:
+
+    rgba(255,253,247,.82);
 
   color:#78845b;
 
-  border:1px solid #aab585;
+  border:
+
+    1px solid #aab585;
 
   font-size:15px;
 
 }
 
+/* ===== 飛機動畫 ===== */
+
 .flight-screen{
 
-  min-height:310px;
+  min-height:250px;
 
   display:none;
 
@@ -294,7 +350,7 @@ button:active{
 
   height:160px;
 
-  top:38px;
+  top:28px;
 
   left:50%;
 
@@ -322,7 +378,7 @@ button:active{
 
   left:36px;
 
-  top:112px;
+  top:102px;
 
   font-size:28px;
 
@@ -332,7 +388,7 @@ button:active{
 
 .flight-text{
 
-  margin-top:160px;
+  margin-top:135px;
 
   font-size:14px;
 
@@ -346,7 +402,11 @@ button:active{
 
   0%{
 
-    transform:translate(0,15px) rotate(-12deg);
+    transform:
+
+      translate(0,15px)
+
+      rotate(-12deg);
 
     opacity:0;
 
@@ -360,7 +420,11 @@ button:active{
 
   100%{
 
-    transform:translate(230px,-83px) rotate(-9deg);
+    transform:
+
+      translate(230px,-83px)
+
+      rotate(-9deg);
 
     opacity:0;
 
@@ -368,19 +432,37 @@ button:active{
 
 }
 
+/* ===== 正式卡片 ===== */
+
 .result-card{
 
-  padding:30px 20px;
+  padding:
 
-  border:1px solid rgba(202,196,155,.85);
+    24px
+
+    18px;
+
+  border:
+
+    1px solid
+
+    rgba(202,196,155,.85);
 
   border-radius:22px;
 
-  background:rgba(255,253,247,.94);
+  background:
 
-  box-shadow:0 10px 25px rgba(74,69,45,.09);
+    rgba(255,253,247,.95);
 
-  animation:cardAppear .45s ease;
+  box-shadow:
+
+    0 10px 25px
+
+    rgba(74,69,45,.09);
+
+  animation:
+
+    cardAppear .45s ease;
 
 }
 
@@ -412,7 +494,7 @@ button:active{
 
   color:#707b56;
 
-  margin-bottom:20px;
+  margin-bottom:18px;
 
 }
 
@@ -422,7 +504,7 @@ button:active{
 
   font-size:18px;
 
-  line-height:1.95;
+  line-height:1.9;
 
   color:#464b3f;
 
@@ -432,9 +514,11 @@ button:active{
 
   font-size:17px;
 
-  margin-top:18px;
+  margin-top:16px;
 
 }
+
+/* ===== 首次限定 ===== */
 
 .first-note{
 
@@ -444,13 +528,21 @@ button:active{
 
   color:#858473;
 
-  margin:24px 0 0;
+  margin:
+
+    22px
+
+    0
+
+    0;
 
 }
 
+/* ===== 雙倍 ===== */
+
 .double-area{
 
-  margin-top:24px;
+  margin-top:22px;
 
 }
 
@@ -476,9 +568,13 @@ button:active{
 
   border-radius:18px;
 
-  border:1px solid rgba(214,207,168,.9);
+  border:
 
-  min-height:230px;
+    1px solid
+
+    rgba(214,207,168,.9);
+
+  min-height:220px;
 
   display:flex;
 
@@ -494,7 +590,9 @@ button:active{
 
   inset:0;
 
-  background-image:url("cities-sprite.jpg");
+  background-image:
+
+    url("cities-sprite.jpg");
 
   background-repeat:no-repeat;
 
@@ -506,7 +604,9 @@ button:active{
 
   inset:0;
 
-  background:rgba(255,252,244,.76);
+  background:
+
+    rgba(255,252,244,.82);
 
 }
 
@@ -516,7 +616,11 @@ button:active{
 
   z-index:2;
 
-  padding:23px 18px;
+  padding:
+
+    22px
+
+    18px;
 
 }
 
@@ -538,27 +642,47 @@ button:active{
 
   font-size:16px;
 
-  line-height:1.78;
+  line-height:1.75;
 
   color:#4c5044;
 
 }
 
+.small-hint{
+
+  font-size:12px;
+
+  line-height:1.65;
+
+  color:#8a8c7e;
+
+  margin-top:14px;
+
+}
+
+/* ===== 結束頁 ===== */
+
 .end-star{
 
   font-size:29px;
 
-  margin-bottom:20px;
+  margin-bottom:18px;
 
 }
 
 .end-title{
 
-  font-family:Georgia,"Times New Roman",serif;
+  font-family:
+
+    Georgia,
+
+    "Times New Roman",
+
+    serif;
 
   font-size:22px;
 
-  margin-bottom:20px;
+  margin-bottom:18px;
 
   color:#555b47;
 
@@ -568,7 +692,7 @@ button:active{
 
   font-size:17px;
 
-  line-height:2;
+  line-height:1.9;
 
   color:#636755;
 
@@ -586,21 +710,13 @@ button:active{
 
   text-underline-offset:3px;
 
-  margin-top:22px;
+  margin-top:20px;
 
-  padding:8px 10px;
+  padding:
 
-}
+    8px
 
-.small-hint{
-
-  font-size:12px;
-
-  line-height:1.65;
-
-  color:#8a8c7e;
-
-  margin-top:14px;
+    10px;
 
 }
 
@@ -608,7 +724,13 @@ button:active{
 
   .panel{
 
-    padding:34px 20px 28px;
+    padding:
+
+      26px
+
+      18px
+
+      22px;
 
   }
 
@@ -644,11 +766,21 @@ button:active{
 
 <div class="panel">
 
+<!-- 首頁 -->
+
 <section id="homeScreen">
 
-  <div class="main-star">✦</div>
+  <div class="main-star">
 
-  <h1>LITTLE HAPPINESS</h1>
+    ✦
+
+  </div>
+
+  <h1>
+
+    LITTLE HAPPINESS
+
+  </h1>
 
   <p class="intro">
 
@@ -658,7 +790,13 @@ button:active{
 
   </p>
 
-  <button class="primary-btn" onclick="startDraw()">
+  <button
+
+    class="primary-btn"
+
+    onclick="startDraw()"
+
+  >
 
     抽一個小開心 ✦
 
@@ -666,9 +804,23 @@ button:active{
 
 </section>
 
-<section id="flightScreen" class="flight-screen">
+<!-- 飛機動畫 -->
 
-  <svg class="flight-route" viewBox="0 0 300 160">
+<section
+
+  id="flightScreen"
+
+  class="flight-screen"
+
+>
+
+  <svg
+
+    class="flight-route"
+
+    viewBox="0 0 300 160"
+
+  >
 
     <path
 
@@ -680,7 +832,11 @@ button:active{
 
   </svg>
 
-  <div class="plane">✈︎</div>
+  <div class="plane">
+
+    ✈︎
+
+  </div>
 
   <div class="flight-text">
 
@@ -690,15 +846,45 @@ button:active{
 
 </section>
 
-<section id="resultScreen" class="hidden">
+<!-- 抽卡結果 -->
 
-  <div id="resultCard" class="result-card">
+<section
 
-    <div id="cardTitle" class="card-title"></div>
+  id="resultScreen"
 
-    <div id="cardText" class="card-text"></div>
+  class="hidden"
 
-    <div class="card-star">✦</div>
+>
+
+  <div
+
+    id="resultCard"
+
+    class="result-card"
+
+  >
+
+    <div
+
+      id="cardTitle"
+
+      class="card-title"
+
+    ></div>
+
+    <div
+
+      id="cardText"
+
+      class="card-text"
+
+    ></div>
+
+    <div class="card-star">
+
+      ✦
+
+    </div>
 
   </div>
 
@@ -716,7 +902,13 @@ button:active{
 
   </button>
 
-  <div id="firstInfo" class="hidden">
+  <div
+
+    id="firstInfo"
+
+    class="hidden"
+
+  >
 
     <p class="first-note">
 
@@ -770,7 +962,13 @@ button:active{
 
   </button>
 
-  <div id="doubleArea" class="double-area hidden">
+  <div
+
+    id="doubleArea"
+
+    class="double-area hidden"
+
+  >
 
     <div class="double-caption">
 
@@ -782,7 +980,13 @@ button:active{
 
     <div class="mini-card">
 
-      <div id="miniBg1" class="mini-bg"></div>
+      <div
+
+        id="miniBg1"
+
+        class="mini-bg"
+
+      ></div>
 
       <div class="mini-veil"></div>
 
@@ -810,7 +1014,13 @@ button:active{
 
     <div class="mini-card">
 
-      <div id="miniBg2" class="mini-bg"></div>
+      <div
+
+        id="miniBg2"
+
+        class="mini-bg"
+
+      ></div>
 
       <div class="mini-veil"></div>
 
@@ -838,7 +1048,9 @@ button:active{
 
     <p class="small-hint">
 
-      想用其中一張的話，記得先截圖。
+      想用其中一張的話，
+
+      記得先截圖。
 
     </p>
 
@@ -858,17 +1070,41 @@ button:active{
 
 </section>
 
-<section id="endScreen" class="hidden">
+<!-- 結束 -->
 
-  <div class="end-star">✦</div>
+<section
 
-  <div id="endTitle" class="end-title">
+  id="endScreen"
+
+  class="hidden"
+
+>
+
+  <div class="end-star">
+
+    ✦
+
+  </div>
+
+  <div
+
+    id="endTitle"
+
+    class="end-title"
+
+  >
 
     今天的小開心已送達
 
   </div>
 
-  <div id="endText" class="end-text"></div>
+  <div
+
+    id="endText"
+
+    class="end-text"
+
+  ></div>
 
   <button
 
@@ -894,53 +1130,15 @@ button:active{
 
 <script>
 
-/* =========================
+const HOME_BG =
 
-   圖片
+  "home-flight.jpg";
 
-========================= */
+const SPRITE_BG =
 
-const HOME_BG = "home-flight.jpg";
+  "cities-sprite.jpg";
 
-const SPRITE_BG = "cities-sprite.jpg";
-
-/*
-
-  cities-sprite.jpg
-
-  3 欄 × 5 列
-
-  0 東京
-
-  1 京都
-
-  2 首爾
-
-  3 大阪
-
-  4 香港
-
-  5 台北
-
-  6 澳門
-
-  7 釜山
-
-  8 清邁
-
-  9 新加坡
-
-  10 吉隆坡
-
-  11 曼谷
-
-  12 河內
-
-  13 峴港
-
-  14 峇里島
-
-*/
+/* 15個不同城市 */
 
 const cityPositions = [
 
@@ -976,35 +1174,31 @@ const cityPositions = [
 
 ];
 
-/* =========================
-
-   15 張正式卡
-
-========================= */
+/* 15張正式卡 */
 
 const cards = [
 
 {
 
-  title:"🎉 今天有中！",
+title:"🎉 今天有中！",
 
-  text:
+text:
 
 `能量補給送給妳。
 
 7-ELEVEN 100元數位商品禮券。`,
 
-  type:"normal",
+type:"normal",
 
-  city:0
+city:0
 
 },
 
 {
 
-  title:"隱藏款 ✦",
+title:"隱藏款 ✦",
 
-  text:
+text:
 
 `欸，居然被妳抽到了。
 
@@ -1012,17 +1206,17 @@ const cards = [
 
 （我做得到的範圍內都可）`,
 
-  type:"normal",
+type:"normal",
 
-  city:1
+city:1
 
 },
 
 {
 
-  title:"小兜風 🚗",
+title:"小兜風 🚗",
 
-  text:
+text:
 
 `走，不管現在多晚。
 
@@ -1032,17 +1226,17 @@ const cards = [
 
 想用的時候，截圖給我。`,
 
-  type:"normal",
+type:"normal",
 
-  city:2
+city:2
 
 },
 
 {
 
-  title:"餐點 🍽️",
+title:"餐點 🍽️",
 
-  text:
+text:
 
 `不想煩惱吃什麼的話，
 
@@ -1050,67 +1244,69 @@ const cards = [
 
 找個時間帶妳去吃。`,
 
-  type:"normal",
+type:"normal",
 
-  city:3
+city:3
 
 },
 
 {
 
-  title:"神秘款 😎",
+title:"神秘款 😎",
 
-  text:
+text:
 
 `這張先截圖傳給我。
 
 其他的先不告訴妳。`,
 
-  type:"normal",
+type:"normal",
 
-  city:4
+city:4
 
 },
 
 {
 
-  title:"飲料我請 🥤",
+title:"飲料我請 🥤",
 
-  text:
+text:
 
 `想喝什麼就選什麼。
 
 截圖給我，這杯算我的。`,
 
-  type:"normal",
+type:"normal",
 
-  city:5
+city:5
 
 },
 
 {
 
-  title:"👑 任性額度 +1",
+title:"👑 任性額度 +1",
 
-  text:
+text:
 
 `恭喜獲得今日限定權限：
 
-可以有一件事情「我爽就好」。
+可以有一件事情
+
+「我爽就好」。
 
 請合理使用 😂`,
 
-  type:"normal",
+type:"normal",
 
-  city:6
+city:6
 
 },
 
 {
 
-  title:"彩蛋 😂",
+title:"彩蛋 😂",
 
-  text:
+text:
 
 `恭喜，什麼都沒抽到。
 
@@ -1118,53 +1314,57 @@ const cards = [
 
 妳今天應該自己就會遇到好事。`,
 
-  type:"normal",
+type:"normal",
 
-  city:7
+city:7
 
 },
 
 {
 
-  title:"抱怨接收券 😤",
+title:"抱怨接收券 😤",
 
-  text:
+text:
 
-`今天很煩的話，把這張傳給我。
+`今天很煩的話，
+
+把這張傳給我。
 
 妳講，我聽。
 
 不一定要找答案。`,
 
-  type:"normal",
+type:"normal",
 
-  city:8
+city:8
 
 },
 
 {
 
-  title:"今天的小幸運 ✦",
+title:"今天的小幸運 ✦",
 
-  text:
+text:
 
 `能抽到這張，
 
 本身就算今天的一件小幸運。
 
-截圖給我，可以點一首歌。🎵`,
+截圖給我，
 
-  type:"normal",
+可以點一首歌。🎵`,
 
-  city:9
+type:"normal",
+
+city:9
 
 },
 
 {
 
-  title:"再抽一次 🎲",
+title:"再抽一次 🎲",
 
-  text:
+text:
 
 `嗯……
 
@@ -1174,17 +1374,17 @@ const cards = [
 
 再給妳一次機會。`,
 
-  type:"retry",
+type:"retry",
 
-  city:10
+city:10
 
 },
 
 {
 
-  title:"今天值得一個小獎勵 🎁",
+title:"今天值得一個小獎勵 🎁",
 
-  text:
+text:
 
 `沒有原因也沒關係。
 
@@ -1192,17 +1392,17 @@ const cards = [
 
 上蝦皮挑個喜歡的小東西吧。`,
 
-  type:"normal",
+type:"normal",
 
-  city:11
+city:11
 
 },
 
 {
 
-  title:"明天的早餐升級 🍳",
+title:"明天的早餐升級 🍳",
 
-  text:
+text:
 
 `明天第一餐不要隨便。
 
@@ -1210,17 +1410,17 @@ const cards = [
 
 早餐我來處理。`,
 
-  type:"normal",
+type:"normal",
 
-  city:12
+city:12
 
 },
 
 {
 
-  title:"雙倍小開心 ✦✦",
+title:"雙倍小開心 ✦✦",
 
-  text:
+text:
 
 `今天好像需要多一點。
 
@@ -1230,17 +1430,17 @@ const cards = [
 
 截圖給我。`,
 
-  type:"double",
+type:"double",
 
-  city:13
+city:13
 
 },
 
 {
 
-  title:"週末逃跑計畫 🚗",
+title:"週末逃跑計畫 🚗",
 
-  text:
+text:
 
 `最近如果有點悶，
 
@@ -1250,25 +1450,21 @@ const cards = [
 
 去哪裡之後再決定。`,
 
-  type:"normal",
+type:"normal",
 
-  city:14
+city:14
 
 }
 
 ];
 
-/* =========================
-
-   首次限定
-
-========================= */
+/* 首次限定 */
 
 const firstCard = {
 
-  title:"首次限定 ✦",
+title:"首次限定 ✦",
 
-  text:
+text:
 
 `後續真的有東西唷。
 
@@ -1284,11 +1480,7 @@ const firstCard = {
 
 };
 
-/* =========================
-
-   儲存紀錄
-
-========================= */
+/* 紀錄 */
 
 const KEY_FIRST =
 
@@ -1306,17 +1498,17 @@ let currentView = null;
 
 let lastBackground = null;
 
-/* =========================
-
-   首頁背景
-
-========================= */
+/* 首頁照片 */
 
 function setHomeBackground(){
 
   const bg =
 
-    document.getElementById("bgPhoto");
+    document.getElementById(
+
+      "bgPhoto"
+
+    );
 
   bg.style.backgroundImage =
 
@@ -1330,43 +1522,65 @@ function setHomeBackground(){
 
     "center";
 
+  /* 首頁仍然柔和，但比之前清楚 */
+
   document
 
-    .getElementById("bgVeil")
+    .getElementById(
+
+      "bgVeil"
+
+    )
 
     .style.background =
 
-      "linear-gradient(" +
+    "linear-gradient(" +
 
-      "180deg," +
+    "180deg," +
 
-      "rgba(255,250,247,.40)," +
+    "rgba(255,250,247,.24)," +
 
-      "rgba(250,248,231,.55)" +
+    "rgba(250,248,231,.34)" +
 
-      ")";
+    ")";
 
 }
 
-/* =========================
+/* 城市照片 */
 
-   城市背景
+function setCityBackground(
 
-========================= */
+  cityIndex
 
-function setCityBackground(cityIndex){
+){
 
   const p =
 
-    cityPositions[cityIndex];
+    cityPositions[
+
+      cityIndex
+
+    ];
 
   const bg =
 
-    document.getElementById("bgPhoto");
+    document.getElementById(
+
+      "bgPhoto"
+
+    );
 
   bg.style.backgroundImage =
 
     `url("${SPRITE_BG}")`;
+
+  /*
+
+    3欄 × 5列的大圖。
+
+    一次只顯示其中一格。
+
+  */
 
   bg.style.backgroundSize =
 
@@ -1378,27 +1592,31 @@ function setCityBackground(cityIndex){
 
   /*
 
-    城市背景故意調淡，
+    這版城市背景明顯很多。
 
-    讓文字卡片是主角。
+    不再像之前幾乎全白。
 
   */
 
   document
 
-    .getElementById("bgVeil")
+    .getElementById(
+
+      "bgVeil"
+
+    )
 
     .style.background =
 
-      "linear-gradient(" +
+    "linear-gradient(" +
 
-      "180deg," +
+    "180deg," +
 
-      "rgba(255,250,247,.54)," +
+    "rgba(255,250,247,.24)," +
 
-      "rgba(250,248,231,.64)" +
+    "rgba(250,248,231,.34)" +
 
-      ")";
+    ")";
 
   lastBackground =
 
@@ -1406,11 +1624,7 @@ function setCityBackground(cityIndex){
 
 }
 
-/* =========================
-
-   二選一小卡背景
-
-========================= */
+/* 二選一背景 */
 
 function setMiniBackground(
 
@@ -1422,7 +1636,11 @@ function setMiniBackground(
 
   const p =
 
-    cityPositions[cityIndex];
+    cityPositions[
+
+      cityIndex
+
+    ];
 
   element.style.backgroundSize =
 
@@ -1434,11 +1652,7 @@ function setMiniBackground(
 
 }
 
-/* =========================
-
-   洗牌
-
-========================= */
+/* 洗牌 */
 
 function shuffle(array){
 
@@ -1448,7 +1662,9 @@ function shuffle(array){
 
   for(
 
-    let i = arr.length - 1;
+    let i =
+
+      arr.length - 1;
 
     i > 0;
 
@@ -1488,11 +1704,7 @@ function shuffle(array){
 
 }
 
-/* =========================
-
-   建立新的一輪
-
-========================= */
+/* 建立新一輪 */
 
 function createFreshDeck(){
 
@@ -1502,7 +1714,9 @@ function createFreshDeck(){
 
       cards.map(
 
-        (_,index) => index
+        (_,index) =>
+
+          index
 
       )
 
@@ -1516,21 +1730,15 @@ function createFreshDeck(){
 
     );
 
-  /*
-
-    避免上一輪最後一張，
-
-    馬上又成為下一輪第一張。
-
-  */
-
   if(
 
     last !== null &&
 
     indexes.length > 1 &&
 
-    indexes[0] === Number(last)
+    indexes[0] ===
+
+      Number(last)
 
   ){
 
@@ -1556,7 +1764,11 @@ function createFreshDeck(){
 
     KEY_DECK,
 
-    JSON.stringify(indexes)
+    JSON.stringify(
+
+      indexes
+
+    )
 
   );
 
@@ -1564,11 +1776,7 @@ function createFreshDeck(){
 
 }
 
-/* =========================
-
-   抽一張
-
-========================= */
+/* 抽一張 */
 
 function takeOneCard(){
 
@@ -1592,13 +1800,19 @@ function takeOneCard(){
 
   catch(e){
 
-    deck = null;
+    deck =
+
+      null;
 
   }
 
   if(
 
-    !Array.isArray(deck) ||
+    !Array.isArray(
+
+      deck
+
+    ) ||
 
     deck.length === 0
 
@@ -1618,7 +1832,11 @@ function takeOneCard(){
 
     KEY_DECK,
 
-    JSON.stringify(deck)
+    JSON.stringify(
+
+      deck
+
+    )
 
   );
 
@@ -1626,7 +1844,11 @@ function takeOneCard(){
 
     KEY_LAST,
 
-    String(index)
+    String(
+
+      index
+
+    )
 
   );
 
@@ -1634,29 +1856,39 @@ function takeOneCard(){
 
     index:index,
 
-    card:cards[index]
+    card:
+
+      cards[index]
 
   };
 
 }
 
-/* =========================
-
-   畫面控制
-
-========================= */
+/* 畫面控制 */
 
 function hideAll(){
 
   document
 
-    .getElementById("homeScreen")
+    .getElementById(
 
-    .classList.add("hidden");
+      "homeScreen"
+
+    )
+
+    .classList.add(
+
+      "hidden"
+
+    );
 
   document
 
-    .getElementById("flightScreen")
+    .getElementById(
+
+      "flightScreen"
+
+    )
 
     .style.display =
 
@@ -1664,15 +1896,31 @@ function hideAll(){
 
   document
 
-    .getElementById("resultScreen")
+    .getElementById(
 
-    .classList.add("hidden");
+      "resultScreen"
+
+    )
+
+    .classList.add(
+
+      "hidden"
+
+    );
 
   document
 
-    .getElementById("endScreen")
+    .getElementById(
 
-    .classList.add("hidden");
+      "endScreen"
+
+    )
+
+    .classList.add(
+
+      "hidden"
+
+    );
 
 }
 
@@ -1698,9 +1946,17 @@ function resetActions(){
 
       document
 
-        .getElementById(id)
+        .getElementById(
 
-        .classList.add("hidden");
+          id
+
+        )
+
+        .classList.add(
+
+          "hidden"
+
+        );
 
     }
 
@@ -1708,13 +1964,13 @@ function resetActions(){
 
 }
 
-/* =========================
+/* 飛機動畫 */
 
-   飛機動畫
+function startFlight(
 
-========================= */
+  callback
 
-function startFlight(callback){
+){
 
   hideAll();
 
@@ -1770,11 +2026,7 @@ function startFlight(callback){
 
 }
 
-/* =========================
-
-   首頁抽卡
-
-========================= */
+/* 首頁按抽卡 */
 
 function startDraw(){
 
@@ -1808,11 +2060,7 @@ function startDraw(){
 
 }
 
-/* =========================
-
-   第一次限定
-
-========================= */
+/* 首次限定 */
 
 function showFirstCard(){
 
@@ -1822,13 +2070,25 @@ function showFirstCard(){
 
   document
 
-    .getElementById("resultScreen")
+    .getElementById(
 
-    .classList.remove("hidden");
+      "resultScreen"
+
+    )
+
+    .classList.remove(
+
+      "hidden"
+
+    );
 
   document
 
-    .getElementById("cardTitle")
+    .getElementById(
+
+      "cardTitle"
+
+    )
 
     .innerText =
 
@@ -1836,7 +2096,11 @@ function showFirstCard(){
 
   document
 
-    .getElementById("cardText")
+    .getElementById(
+
+      "cardText"
+
+    )
 
     .innerText =
 
@@ -1844,9 +2108,17 @@ function showFirstCard(){
 
   document
 
-    .getElementById("firstInfo")
+    .getElementById(
 
-    .classList.remove("hidden");
+      "firstInfo"
+
+    )
+
+    .classList.remove(
+
+      "hidden"
+
+    );
 
   currentView =
 
@@ -1854,11 +2126,7 @@ function showFirstCard(){
 
 }
 
-/* =========================
-
-   首次限定：我知道了
-
-========================= */
+/* 我知道了 */
 
 function confirmFirstCard(){
 
@@ -1876,13 +2144,25 @@ function confirmFirstCard(){
 
   document
 
-    .getElementById("endScreen")
+    .getElementById(
 
-    .classList.remove("hidden");
+      "endScreen"
+
+    )
+
+    .classList.remove(
+
+      "hidden"
+
+    );
 
   document
 
-    .getElementById("endTitle")
+    .getElementById(
+
+      "endTitle"
+
+    )
 
     .innerText =
 
@@ -1890,27 +2170,35 @@ function confirmFirstCard(){
 
   document
 
-    .getElementById("endText")
+    .getElementById(
+
+      "endText"
+
+    )
 
     .innerHTML =
 
-      "下次再掃 QR Code，<br>" +
+    "下次再掃 QR Code，<br>" +
 
-      "就開始正式抽卡囉！";
+    "就開始正式抽卡囉！";
 
   document
 
-    .getElementById("backToLastButton")
+    .getElementById(
 
-    .classList.add("hidden");
+      "backToLastButton"
+
+    )
+
+    .classList.add(
+
+      "hidden"
+
+    );
 
 }
 
-/* =========================
-
-   正式抽卡
-
-========================= */
+/* 正式抽卡 */
 
 function drawOfficialCard(){
 
@@ -1930,11 +2218,7 @@ function drawOfficialCard(){
 
 }
 
-/* =========================
-
-   顯示卡片
-
-========================= */
+/* 顯示卡片 */
 
 function showCard(
 
@@ -1956,13 +2240,25 @@ function showCard(
 
   document
 
-    .getElementById("resultScreen")
+    .getElementById(
 
-    .classList.remove("hidden");
+      "resultScreen"
+
+    )
+
+    .classList.remove(
+
+      "hidden"
+
+    );
 
   document
 
-    .getElementById("cardTitle")
+    .getElementById(
+
+      "cardTitle"
+
+    )
 
     .innerText =
 
@@ -1970,7 +2266,11 @@ function showCard(
 
   document
 
-    .getElementById("cardText")
+    .getElementById(
+
+      "cardText"
+
+    )
 
     .innerText =
 
@@ -1978,29 +2278,49 @@ function showCard(
 
   if(
 
-    card.type === "retry"
+    card.type ===
+
+      "retry"
 
   ){
 
     document
 
-      .getElementById("retryButton")
+      .getElementById(
 
-      .classList.remove("hidden");
+        "retryButton"
+
+      )
+
+      .classList.remove(
+
+        "hidden"
+
+      );
 
   }
 
   else if(
 
-    card.type === "double"
+    card.type ===
+
+      "double"
 
   ){
 
     document
 
-      .getElementById("doubleButton")
+      .getElementById(
 
-      .classList.remove("hidden");
+        "doubleButton"
+
+      )
+
+      .classList.remove(
+
+        "hidden"
+
+      );
 
   }
 
@@ -2008,13 +2328,25 @@ function showCard(
 
     document
 
-      .getElementById("acceptButton")
+      .getElementById(
 
-      .classList.remove("hidden");
+        "acceptButton"
+
+      )
+
+      .classList.remove(
+
+        "hidden"
+
+      );
 
   }
 
-  if(saveView){
+  if(
+
+    saveView
+
+  ){
 
     currentView = {
 
@@ -2028,11 +2360,7 @@ function showCard(
 
 }
 
-/* =========================
-
-   再抽一次
-
-========================= */
+/* 再抽一次 */
 
 function drawExtraCard(){
 
@@ -2060,11 +2388,7 @@ function drawExtraCard(){
 
 }
 
-/* =========================
-
-   雙倍小開心
-
-========================= */
+/* 雙倍小開心 */
 
 function drawDoubleCards(){
 
@@ -2080,13 +2404,25 @@ function drawDoubleCards(){
 
   document
 
-    .getElementById("doubleArea")
+    .getElementById(
 
-    .classList.remove("hidden");
+      "doubleArea"
+
+    )
+
+    .classList.remove(
+
+      "hidden"
+
+    );
 
   document
 
-    .getElementById("doubleTitle1")
+    .getElementById(
+
+      "doubleTitle1"
+
+    )
 
     .innerText =
 
@@ -2094,7 +2430,11 @@ function drawDoubleCards(){
 
   document
 
-    .getElementById("doubleText1")
+    .getElementById(
+
+      "doubleText1"
+
+    )
 
     .innerText =
 
@@ -2102,11 +2442,13 @@ function drawDoubleCards(){
 
   setMiniBackground(
 
-    document.getElementById(
+    document
 
-      "miniBg1"
+      .getElementById(
 
-    ),
+        "miniBg1"
+
+      ),
 
     first.card.city
 
@@ -2114,7 +2456,11 @@ function drawDoubleCards(){
 
   document
 
-    .getElementById("doubleTitle2")
+    .getElementById(
+
+      "doubleTitle2"
+
+    )
 
     .innerText =
 
@@ -2122,7 +2468,11 @@ function drawDoubleCards(){
 
   document
 
-    .getElementById("doubleText2")
+    .getElementById(
+
+      "doubleText2"
+
+    )
 
     .innerText =
 
@@ -2130,11 +2480,13 @@ function drawDoubleCards(){
 
   setMiniBackground(
 
-    document.getElementById(
+    document
 
-      "miniBg2"
+      .getElementById(
 
-    ),
+        "miniBg2"
+
+      ),
 
     second.card.city
 
@@ -2144,21 +2496,23 @@ function drawDoubleCards(){
 
     kind:"double",
 
-    first:first.index,
+    first:
 
-    second:second.index,
+      first.index,
 
-    base:lastBackground
+    second:
+
+      second.index,
+
+    base:
+
+      lastBackground
 
   };
 
 }
 
-/* =========================
-
-   收下 → 結束
-
-========================= */
+/* 收下 */
 
 function finishDraw(){
 
@@ -2166,7 +2520,9 @@ function finishDraw(){
 
   if(
 
-    lastBackground !== null
+    lastBackground !==
+
+      null
 
   ){
 
@@ -2180,13 +2536,25 @@ function finishDraw(){
 
   document
 
-    .getElementById("endScreen")
+    .getElementById(
 
-    .classList.remove("hidden");
+      "endScreen"
+
+    )
+
+    .classList.remove(
+
+      "hidden"
+
+    );
 
   document
 
-    .getElementById("endTitle")
+    .getElementById(
+
+      "endTitle"
+
+    )
 
     .innerText =
 
@@ -2194,25 +2562,41 @@ function finishDraw(){
 
   document
 
-    .getElementById("endText")
+    .getElementById(
+
+      "endText"
+
+    )
 
     .innerHTML =
 
-      "希望有讓今天<br>" +
+    "希望有讓今天<br>" +
 
-      "多一點點開心。<br><br>" +
+    "多一點點開心。<br><br>" +
 
-      "下次想起來的時候，<br>" +
+    "下次想起來的時候，<br>" +
 
-      "再來吧。";
+    "再來吧。";
 
-  if(currentView){
+  if(
+
+    currentView
+
+  ){
 
     document
 
-      .getElementById("backToLastButton")
+      .getElementById(
 
-      .classList.remove("hidden");
+        "backToLastButton"
+
+      )
+
+      .classList.remove(
+
+        "hidden"
+
+      );
 
   }
 
@@ -2220,19 +2604,23 @@ function finishDraw(){
 
     document
 
-      .getElementById("backToLastButton")
+      .getElementById(
 
-      .classList.add("hidden");
+        "backToLastButton"
+
+      )
+
+      .classList.add(
+
+        "hidden"
+
+      );
 
   }
 
 }
 
-/* =========================
-
-   等等，我還沒截圖
-
-========================= */
+/* 忘了截圖 */
 
 function restoreLastView(){
 
@@ -2248,11 +2636,11 @@ function restoreLastView(){
 
   hideAll();
 
-  /* 一般卡 */
-
   if(
 
-    currentView.kind === "single"
+    currentView.kind ===
+
+      "single"
 
   ){
 
@@ -2276,11 +2664,11 @@ function restoreLastView(){
 
   }
 
-  /* 雙倍小開心 */
-
   else if(
 
-    currentView.kind === "double"
+    currentView.kind ===
+
+      "double"
 
   ){
 
@@ -2310,21 +2698,41 @@ function restoreLastView(){
 
     document
 
-      .getElementById("resultScreen")
+      .getElementById(
 
-      .classList.remove("hidden");
+        "resultScreen"
+
+      )
+
+      .classList.remove(
+
+        "hidden"
+
+      );
 
     resetActions();
 
     document
 
-      .getElementById("doubleArea")
+      .getElementById(
 
-      .classList.remove("hidden");
+        "doubleArea"
+
+      )
+
+      .classList.remove(
+
+        "hidden"
+
+      );
 
     document
 
-      .getElementById("doubleTitle1")
+      .getElementById(
+
+        "doubleTitle1"
+
+      )
 
       .innerText =
 
@@ -2332,7 +2740,11 @@ function restoreLastView(){
 
     document
 
-      .getElementById("doubleText1")
+      .getElementById(
+
+        "doubleText1"
+
+      )
 
       .innerText =
 
@@ -2340,11 +2752,13 @@ function restoreLastView(){
 
     setMiniBackground(
 
-      document.getElementById(
+      document
 
-        "miniBg1"
+        .getElementById(
 
-      ),
+          "miniBg1"
+
+        ),
 
       card1.city
 
@@ -2352,7 +2766,11 @@ function restoreLastView(){
 
     document
 
-      .getElementById("doubleTitle2")
+      .getElementById(
+
+        "doubleTitle2"
+
+      )
 
       .innerText =
 
@@ -2360,7 +2778,11 @@ function restoreLastView(){
 
     document
 
-      .getElementById("doubleText2")
+      .getElementById(
+
+        "doubleText2"
+
+      )
 
       .innerText =
 
@@ -2368,11 +2790,13 @@ function restoreLastView(){
 
     setMiniBackground(
 
-      document.getElementById(
+      document
 
-        "miniBg2"
+        .getElementById(
 
-      ),
+          "miniBg2"
+
+        ),
 
       card2.city
 
@@ -2382,11 +2806,7 @@ function restoreLastView(){
 
 }
 
-/* =========================
-
-   網站載入
-
-========================= */
+/* 網站載入 */
 
 window.addEventListener(
 
