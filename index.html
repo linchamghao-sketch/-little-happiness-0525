@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>LITTLE HAPPINESS · No.0525</title>
+
+  <style>
+
+    * {
+
+      box-sizing: border-box;
+
+    }
+
+    body {
+
+      margin: 0;
+
+      min-height: 100vh;
+
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang TC",
+
+                   "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+
+      background:
+
+        linear-gradient(
+
+          160deg,
+
+          #fffaf4 0%,
+
+          #fff3f2 30%,
+
+          #f6f4d8 65%,
+
+          #eef6e8 100%
+
+        );
+
+      color: #3f4435;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 24px;
+
+    }
+
+    .page {
+
+      width: 100%;
+
+      max-width: 430px;
+
+    }
+
+    .top-label {
+
+      text-align: center;
+
+      font-size: 12px;
+
+      letter-spacing: 3px;
+
+      color: #7f8c64;
+
+      margin-bottom: 12px;
+
+    }
+
+    .container {
+
+      background: rgba(255,255,255,0.80);
+
+      border: 1px solid #d7d9b7;
+
+      border-radius: 24px;
+
+      padding: 34px 24px 26px;
+
+      box-shadow:
+
+        0 12px 35px rgba(95, 90, 70, 0.10);
+
+      text-align: center;
+
+    }
+
+    .star {
+
+      font-size: 30px;
+
+      color: #c99f3b;
+
+      margin-bottom: 10px;
+
+    }
+
+    h1 {
+
+      font-family: Georgia, "Times New Roman", serif;
+
+      font-size: 27px;
+
+      letter-spacing: 2px;
+
+      margin: 4px 0 5px;
+
+      font-weight: 500;
+
+    }
+
+    .serial {
+
+      font-family: Georgia, "Times New Roman", serif;
+
+      font-size: 13px;
+
+      color: #879267;
+
+      letter-spacing: 2px;
+
+      margin-bottom: 28px;
+
+    }
+
+    .intro {
+
+      font-size: 16px;
+
+      line-height: 1.9;
+
+      margin: 0 auto 26px;
+
+      max-width: 320px;
+
+      color: #555846;
+
+    }
+
+    button {
+
+      border: none;
+
+      background: #9dab73;
+
+      color: white;
+
+      padding: 15px 28px;
+
+      border-radius: 999px;
+
+      font-size: 16px;
+
+      letter-spacing: 1px;
+
+      cursor: pointer;
+
+      box-shadow:
+
+        0 6px 15px rgba(95, 110, 65, .18);
+
+    }
+
+    button:active {
+
+      transform: scale(.97);
+
+    }
+
+    .card {
+
+      display: none;
+
+      margin-top: 28px;
+
+      padding: 26px 22px;
+
+      background: #fffdf8;
+
+      border: 1px solid #dfd8b8;
+
+      border-radius: 20px;
+
+      box-shadow:
+
+        0 8px 22px rgba(90,80,60,.08);
+
+      animation: appear .45s ease;
+
+    }
+
+    @keyframes appear {
+
+      from {
+
+        opacity: 0;
+
+        transform: translateY(8px);
+
+      }
+
+      to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+      }
+
+    }
+
+    .card-type {
+
+      color: #aa8e42;
+
+      font-size: 11px;
+
+      letter-spacing: 2px;
+
+      margin-bottom: 14px;
+
+    }
+
+    .card-text {
+
+      font-size: 19px;
+
+      line-height: 1.8;
+
+      color: #414336;
+
+      white-space: pre-line;
+
+    }
+
+    .tiny-star {
+
+      color: #d0a53d;
+
+      margin: 15px 0 2px;
+
+      font-size: 18px;
+
+    }
+
+    .again {
+
+      display: none;
+
+      margin-top: 18px;
+
+      background: transparent;
+
+      color: #7d8961;
+
+      border: 1px solid #bfc6a1;
+
+      box-shadow: none;
+
+      font-size: 14px;
+
+      padding: 11px 21px;
+
+    }
+
+    .footer {
+
+      margin-top: 28px;
+
+      border-top: 1px solid #e4e0cb;
+
+      padding-top: 18px;
+
+      font-family: Georgia, "Times New Roman", serif;
+
+      font-size: 10px;
+
+      line-height: 1.9;
+
+      letter-spacing: 1.5px;
+
+      color: #98957d;
+
+    }
+
+    .delivered {
+
+      color: #849464;
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="page">
+
+    <div class="top-label">
+
+      A LITTLE SOMETHING FOR YOU
+
+    </div>
+
+    <div class="container">
+
+      <div class="star">✦</div>
+
+      <h1>LITTLE HAPPINESS</h1>
+
+      <div class="serial">
+
+        SERIAL No. 0525
+
+      </div>
+
+      <div id="introSection">
+
+        <p class="intro">
+
+          如果今天剛好少了一點開心，<br>
+
+          就從這裡抽一個吧。
+
+        </p>
+
+        <button onclick="drawCard()">
+
+          抽一個小開心 ✦
+
+        </button>
+
+      </div>
+
+      <div id="resultCard" class="card">
+
+        <div id="cardType" class="card-type"></div>
+
+        <div id="cardText" class="card-text"></div>
+
+        <div class="tiny-star">✦</div>
+
+      </div>
+
+      <button
+
+        id="againButton"
+
+        class="again"
+
+        onclick="drawCard()"
+
+      >
+
+        再抽一張
+
+      </button>
+
+      <div class="footer">
+
+        LITTLE HAPPINESS™<br>
+
+        SERIAL NO. 0525<br>
+
+        <span class="delivered">
+
+          STATUS · DELIVERED ✓
+
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+<script>
+
+const cards = [
+
+  {
+
+    type: "TODAY'S LITTLE THING",
+
+    text: "今天挑一杯妳真的想喝的飲料。\n不要想太久，喜歡就好 🥤"
+
+  },
+
+  {
+
+    type: "SWEET PERMISSION",
+
+    text: "今日甜點許可證已發放。\n有效期限：今天 🍰"
+
+  },
+
+  {
+
+    type: "REST CARD",
+
+    text: "今天可以稍微放慢一點。\n不是每件事都需要現在完成。"
+
+  },
+
+  {
+
+    type: "LITTLE MISSION",
+
+    text: "今天找一首很久沒聽、\n但以前很喜歡的歌來聽 🎧"
+
+  },
+
+  {
+
+    type: "TODAY'S LITTLE THING",
+
+    text: "如果今天的天空還不錯，\n抬頭看它兩分鐘。"
+
+  },
+
+  {
+
+    type: "SPECIAL PERMISSION",
+
+    text: "今天允許自己耍廢一下。\n批准。✓"
+
+  },
+
+  {
+
+    type: "LITTLE MISSION",
+
+    text: "今天看到覺得可愛或漂亮的東西，\n拍一張留下來。"
+
+  },
+
+  {
+
+    type: "MOOD RECOVERY",
+
+    text: "如果今天有人很煩，\n批准妳在心裡翻三次白眼 🙄"
+
+  },
+
+  {
+
+    type: "TODAY'S LITTLE THING",
+
+    text: "下班後買一樣突然很想吃的東西。\n今天不要分析太多。"
+
+  },
+
+  {
+
+    type: "REST CARD",
+
+    text: "手機先放旁邊五分鐘。\n什麼都不用處理。"
+
+  },
+
+  {
+
+    type: "LUCKY CARD",
+
+    text: "今天可能會有一件小小的好事。\n記得注意一下 ✦"
+
+  },
+
+  {
+
+    type: "TODAY'S LITTLE THING",
+
+    text: "今天讓自己早一點睡。\n明天的事，明天再處理。"
+
+  },
+
+  {
+
+    type: "SPECIAL PERMISSION",
+
+    text: "今天不想討好任何人也可以。"
+
+  },
+
+  {
+
+    type: "LITTLE MISSION",
+
+    text: "找一樣今天值得說『還不錯』的事情。"
+
+  },
+
+  {
+
+    type: "MOOD RECOVERY",
+
+    text: "今天如果很累，\n那就把標準降低一點。\n有完成就很好。"
+
+  },
+
+  {
+
+    type: "TODAY'S LITTLE THING",
+
+    text: "今天替自己選一樣喜歡的東西。\n小小的也算。"
+
+  },
+
+  {
+
+    type: "LUCKY CARD",
+
+    text: "恭喜。\n妳抽到一張沒有任務的卡。\n今天就單純過日子吧 😂"
+
+  },
+
+  {
+
+    type: "REST CARD",
+
+    text: "找個舒服的位置坐一下。\n慢慢喝幾口水。"
+
+  },
+
+  {
+
+    type: "LITTLE MISSION",
+
+    text: "今天找一個理由笑一下。\n很無聊的理由也可以。"
+
+  },
+
+  {
+
+    type: "SWEET PERMISSION",
+
+    text: "今天如果想吃甜的，\n這張卡說：可以。"
+
+  },
+
+  {
+
+    type: "TODAY'S LITTLE THING",
+
+    text: "下班以後，\n做一件完全跟工作沒有關係的事。"
+
+  },
+
+  {
+
+    type: "MOOD RECOVERY",
+
+    text: "今天遇到鳥事？\n先把它放旁邊。\n不要讓它拿走整晚。"
+
+  },
+
+  {
+
+    type: "RARE CARD ✦",
+
+    text: "恭喜抽到隱藏款。\n今天可以任性一點。\n有效期限：今天。"
+
+  },
+
+  {
+
+    type: "RARE CARD ✦",
+
+    text: "今天沒有任務。\n只是希望妳剛好看到這張的時候，\n心情有好一點點。"
+
+  }
+
+];
+
+let lastIndex = localStorage.getItem("littleHappinessLast");
+
+function drawCard() {
+
+  let index;
+
+  do {
+
+    index = Math.floor(Math.random() * cards.length);
+
+  }
+
+  while (
+
+    cards.length > 1 &&
+
+    index.toString() === lastIndex
+
+  );
+
+  lastIndex = index.toString();
+
+  localStorage.setItem(
+
+    "littleHappinessLast",
+
+    lastIndex
+
+  );
+
+  const chosen = cards[index];
+
+  document.getElementById("cardType").innerText =
+
+    chosen.type;
+
+  document.getElementById("cardText").innerText =
+
+    chosen.text;
+
+  document.getElementById("resultCard").style.display =
+
+    "block";
+
+  document.getElementById("againButton").style.display =
+
+    "inline-block";
+
+  document.getElementById("introSection").style.display =
+
+    "none";
+
+}
+
+</script>
+
+</body>
+
+</html
