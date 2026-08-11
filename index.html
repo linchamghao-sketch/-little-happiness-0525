@@ -28,11 +28,7 @@
 
 }
 
-*{
-
-  box-sizing:border-box;
-
-}
+*{box-sizing:border-box}
 
 html,body{
 
@@ -40,19 +36,7 @@ html,body{
 
   min-height:100%;
 
-  font-family:
-
-    -apple-system,
-
-    BlinkMacSystemFont,
-
-    "PingFang TC",
-
-    "Noto Sans TC",
-
-    "Microsoft JhengHei",
-
-    sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
 
   color:var(--ink);
 
@@ -82,21 +66,11 @@ body{
 
   background-size:cover;
 
-  transition:
+  transition:opacity .35s ease,filter .35s ease;
 
-    opacity .35s ease,
-
-    filter .35s ease;
-
-  filter:
-
-    saturate(1.05)
-
-    contrast(1.03);
+  filter:saturate(1.08) contrast(1.05);
 
 }
-
-/* 背景只做輕微淡化 */
 
 #bgVeil{
 
@@ -108,17 +82,15 @@ body{
 
   pointer-events:none;
 
-  background:
+  background:linear-gradient(
 
-    linear-gradient(
+    180deg,
 
-      180deg,
+    rgba(255,249,245,.10),
 
-      rgba(255,249,245,.22),
+    rgba(249,247,225,.16)
 
-      rgba(249,247,225,.30)
-
-    );
+  );
 
 }
 
@@ -136,13 +108,7 @@ body{
 
   justify-content:center;
 
-  padding:
-
-    20px
-
-    18px
-
-    calc(24px + env(safe-area-inset-bottom));
+  padding:20px 18px calc(24px + env(safe-area-inset-bottom));
 
 }
 
@@ -158,25 +124,15 @@ body{
 
   background:rgba(255,253,247,.91);
 
-  border:
-
-    1px solid var(--line);
+  border:1px solid var(--line);
 
   border-radius:26px;
 
-  padding:
-
-    30px
-
-    22px
-
-    24px;
+  padding:30px 22px 24px;
 
   text-align:center;
 
-  box-shadow:
-
-    0 16px 38px rgba(70,70,45,.13);
+  box-shadow:0 16px 38px rgba(70,70,45,.13);
 
   backdrop-filter:blur(7px);
 
@@ -186,7 +142,7 @@ body{
 
 .hidden{
 
-  display:none !important;
+  display:none!important;
 
 }
 
@@ -212,13 +168,7 @@ h1{
 
   margin:0 0 26px;
 
-  font-family:
-
-    Georgia,
-
-    "Times New Roman",
-
-    serif;
+  font-family:Georgia,"Times New Roman",serif;
 
   font-size:28px;
 
@@ -264,9 +214,7 @@ button{
 
   letter-spacing:.5px;
 
-  transition:
-
-    transform .12s ease;
+  transition:transform .12s ease;
 
 }
 
@@ -280,23 +228,15 @@ button:active{
 
   min-width:230px;
 
-  padding:
-
-    16px
-
-    26px;
+  padding:16px 26px;
 
   background:var(--olive);
 
-  color:white;
+  color:#fff;
 
   font-size:17px;
 
-  box-shadow:
-
-    0 8px 20px
-
-    rgba(90,105,62,.18);
+  box-shadow:0 8px 20px rgba(90,105,62,.18);
 
 }
 
@@ -304,27 +244,17 @@ button:active{
 
   margin-top:18px;
 
-  padding:
+  padding:13px 23px;
 
-    13px
-
-    23px;
-
-  background:
-
-    rgba(255,253,247,.82);
+  background:rgba(255,253,247,.82);
 
   color:#78845b;
 
-  border:
-
-    1px solid #aab585;
+  border:1px solid #aab585;
 
   font-size:15px;
 
 }
-
-/* ===== 飛機動畫 ===== */
 
 .flight-screen{
 
@@ -402,11 +332,7 @@ button:active{
 
   0%{
 
-    transform:
-
-      translate(0,15px)
-
-      rotate(-12deg);
+    transform:translate(0,15px) rotate(-12deg);
 
     opacity:0;
 
@@ -420,11 +346,7 @@ button:active{
 
   100%{
 
-    transform:
-
-      translate(230px,-83px)
-
-      rotate(-9deg);
+    transform:translate(230px,-83px) rotate(-9deg);
 
     opacity:0;
 
@@ -432,37 +354,19 @@ button:active{
 
 }
 
-/* ===== 正式卡片 ===== */
-
 .result-card{
 
-  padding:
+  padding:24px 18px;
 
-    24px
-
-    18px;
-
-  border:
-
-    1px solid
-
-    rgba(202,196,155,.85);
+  border:1px solid rgba(202,196,155,.85);
 
   border-radius:22px;
 
-  background:
+  background:rgba(255,253,247,.95);
 
-    rgba(255,253,247,.95);
+  box-shadow:0 10px 25px rgba(74,69,45,.09);
 
-  box-shadow:
-
-    0 10px 25px
-
-    rgba(74,69,45,.09);
-
-  animation:
-
-    cardAppear .45s ease;
+  animation:cardAppear .45s ease;
 
 }
 
@@ -518,8 +422,6 @@ button:active{
 
 }
 
-/* ===== 首次限定 ===== */
-
 .first-note{
 
   font-size:13px;
@@ -528,17 +430,9 @@ button:active{
 
   color:#858473;
 
-  margin:
-
-    22px
-
-    0
-
-    0;
+  margin:22px 0 0;
 
 }
-
-/* ===== 雙倍 ===== */
 
 .double-area{
 
@@ -568,11 +462,7 @@ button:active{
 
   border-radius:18px;
 
-  border:
-
-    1px solid
-
-    rgba(214,207,168,.9);
+  border:1px solid rgba(214,207,168,.9);
 
   min-height:220px;
 
@@ -590,9 +480,7 @@ button:active{
 
   inset:0;
 
-  background-image:
-
-    url("cities-sprite.jpg");
+  background-image:url("cities-sprite.jpg");
 
   background-repeat:no-repeat;
 
@@ -604,9 +492,7 @@ button:active{
 
   inset:0;
 
-  background:
-
-    rgba(255,252,244,.82);
+  background:rgba(255,252,244,.70);
 
 }
 
@@ -616,11 +502,7 @@ button:active{
 
   z-index:2;
 
-  padding:
-
-    22px
-
-    18px;
+  padding:22px 18px;
 
 }
 
@@ -660,8 +542,6 @@ button:active{
 
 }
 
-/* ===== 結束頁 ===== */
-
 .end-star{
 
   font-size:29px;
@@ -672,13 +552,7 @@ button:active{
 
 .end-title{
 
-  font-family:
-
-    Georgia,
-
-    "Times New Roman",
-
-    serif;
+  font-family:Georgia,"Times New Roman",serif;
 
   font-size:22px;
 
@@ -712,11 +586,7 @@ button:active{
 
   margin-top:20px;
 
-  padding:
-
-    8px
-
-    10px;
+  padding:8px 10px;
 
 }
 
@@ -724,13 +594,7 @@ button:active{
 
   .panel{
 
-    padding:
-
-      26px
-
-      18px
-
-      22px;
+    padding:26px 18px 22px;
 
   }
 
@@ -766,21 +630,11 @@ button:active{
 
 <div class="panel">
 
-<!-- 首頁 -->
-
 <section id="homeScreen">
 
-  <div class="main-star">
+  <div class="main-star">✦</div>
 
-    ✦
-
-  </div>
-
-  <h1>
-
-    LITTLE HAPPINESS
-
-  </h1>
+  <h1>LITTLE HAPPINESS</h1>
 
   <p class="intro">
 
@@ -790,13 +644,7 @@ button:active{
 
   </p>
 
-  <button
-
-    class="primary-btn"
-
-    onclick="startDraw()"
-
-  >
+  <button class="primary-btn" onclick="startDraw()">
 
     抽一個小開心 ✦
 
@@ -804,23 +652,9 @@ button:active{
 
 </section>
 
-<!-- 飛機動畫 -->
+<section id="flightScreen" class="flight-screen">
 
-<section
-
-  id="flightScreen"
-
-  class="flight-screen"
-
->
-
-  <svg
-
-    class="flight-route"
-
-    viewBox="0 0 300 160"
-
-  >
+  <svg class="flight-route" viewBox="0 0 300 160">
 
     <path
 
@@ -832,11 +666,7 @@ button:active{
 
   </svg>
 
-  <div class="plane">
-
-    ✈︎
-
-  </div>
+  <div class="plane">✈︎</div>
 
   <div class="flight-text">
 
@@ -846,45 +676,15 @@ button:active{
 
 </section>
 
-<!-- 抽卡結果 -->
+<section id="resultScreen" class="hidden">
 
-<section
+  <div id="resultCard" class="result-card">
 
-  id="resultScreen"
+    <div id="cardTitle" class="card-title"></div>
 
-  class="hidden"
+    <div id="cardText" class="card-text"></div>
 
->
-
-  <div
-
-    id="resultCard"
-
-    class="result-card"
-
-  >
-
-    <div
-
-      id="cardTitle"
-
-      class="card-title"
-
-    ></div>
-
-    <div
-
-      id="cardText"
-
-      class="card-text"
-
-    ></div>
-
-    <div class="card-star">
-
-      ✦
-
-    </div>
+    <div class="card-star">✦</div>
 
   </div>
 
@@ -902,13 +702,7 @@ button:active{
 
   </button>
 
-  <div
-
-    id="firstInfo"
-
-    class="hidden"
-
-  >
+  <div id="firstInfo" class="hidden">
 
     <p class="first-note">
 
@@ -962,13 +756,7 @@ button:active{
 
   </button>
 
-  <div
-
-    id="doubleArea"
-
-    class="double-area hidden"
-
-  >
+  <div id="doubleArea" class="double-area hidden">
 
     <div class="double-caption">
 
@@ -1048,9 +836,7 @@ button:active{
 
     <p class="small-hint">
 
-      想用其中一張的話，
-
-      記得先截圖。
+      想用其中一張的話，記得先截圖。
 
     </p>
 
@@ -1070,41 +856,17 @@ button:active{
 
 </section>
 
-<!-- 結束 -->
+<section id="endScreen" class="hidden">
 
-<section
+  <div class="end-star">✦</div>
 
-  id="endScreen"
-
-  class="hidden"
-
->
-
-  <div class="end-star">
-
-    ✦
-
-  </div>
-
-  <div
-
-    id="endTitle"
-
-    class="end-title"
-
-  >
+  <div id="endTitle" class="end-title">
 
     今天的小開心已送達
 
   </div>
 
-  <div
-
-    id="endText"
-
-    class="end-text"
-
-  ></div>
+  <div id="endText" class="end-text"></div>
 
   <button
 
@@ -1130,15 +892,9 @@ button:active{
 
 <script>
 
-const HOME_BG =
+const HOME_BG = "home-flight.jpg";
 
-  "home-flight.jpg";
-
-const SPRITE_BG =
-
-  "cities-sprite.jpg";
-
-/* 15個不同城市 */
+const SPRITE_BG = "cities-sprite.jpg";
 
 const cityPositions = [
 
@@ -1174,31 +930,29 @@ const cityPositions = [
 
 ];
 
-/* 15張正式卡 */
-
 const cards = [
 
 {
 
-title:"🎉 今天有中！",
+  title:"🎉 今天有中！",
 
-text:
+  text:
 
 `能量補給送給妳。
 
 7-ELEVEN 100元數位商品禮券。`,
 
-type:"normal",
+  type:"normal",
 
-city:0
+  city:0
 
 },
 
 {
 
-title:"隱藏款 ✦",
+  title:"隱藏款 ✦",
 
-text:
+  text:
 
 `欸，居然被妳抽到了。
 
@@ -1206,17 +960,17 @@ text:
 
 （我做得到的範圍內都可）`,
 
-type:"normal",
+  type:"normal",
 
-city:1
+  city:1
 
 },
 
 {
 
-title:"小兜風 🚗",
+  title:"小兜風 🚗",
 
-text:
+  text:
 
 `走，不管現在多晚。
 
@@ -1226,17 +980,17 @@ text:
 
 想用的時候，截圖給我。`,
 
-type:"normal",
+  type:"normal",
 
-city:2
+  city:2
 
 },
 
 {
 
-title:"餐點 🍽️",
+  title:"餐點 🍽️",
 
-text:
+  text:
 
 `不想煩惱吃什麼的話，
 
@@ -1244,49 +998,49 @@ text:
 
 找個時間帶妳去吃。`,
 
-type:"normal",
+  type:"normal",
 
-city:3
+  city:3
 
 },
 
 {
 
-title:"神秘款 😎",
+  title:"神秘款 😎",
 
-text:
+  text:
 
 `這張先截圖傳給我。
 
 其他的先不告訴妳。`,
 
-type:"normal",
+  type:"normal",
 
-city:4
+  city:4
 
 },
 
 {
 
-title:"飲料我請 🥤",
+  title:"飲料我請 🥤",
 
-text:
+  text:
 
 `想喝什麼就選什麼。
 
 截圖給我，這杯算我的。`,
 
-type:"normal",
+  type:"normal",
 
-city:5
+  city:5
 
 },
 
 {
 
-title:"👑 任性額度 +1",
+  title:"👑 任性額度 +1",
 
-text:
+  text:
 
 `恭喜獲得今日限定權限：
 
@@ -1296,17 +1050,17 @@ text:
 
 請合理使用 😂`,
 
-type:"normal",
+  type:"normal",
 
-city:6
+  city:6
 
 },
 
 {
 
-title:"彩蛋 😂",
+  title:"彩蛋 😂",
 
-text:
+  text:
 
 `恭喜，什麼都沒抽到。
 
@@ -1314,17 +1068,17 @@ text:
 
 妳今天應該自己就會遇到好事。`,
 
-type:"normal",
+  type:"normal",
 
-city:7
+  city:7
 
 },
 
 {
 
-title:"抱怨接收券 😤",
+  title:"抱怨接收券 😤",
 
-text:
+  text:
 
 `今天很煩的話，
 
@@ -1334,17 +1088,17 @@ text:
 
 不一定要找答案。`,
 
-type:"normal",
+  type:"normal",
 
-city:8
+  city:8
 
 },
 
 {
 
-title:"今天的小幸運 ✦",
+  title:"今天的小幸運 ✦",
 
-text:
+  text:
 
 `能抽到這張，
 
@@ -1354,17 +1108,17 @@ text:
 
 可以點一首歌。🎵`,
 
-type:"normal",
+  type:"normal",
 
-city:9
+  city:9
 
 },
 
 {
 
-title:"再抽一次 🎲",
+  title:"再抽一次 🎲",
 
-text:
+  text:
 
 `嗯……
 
@@ -1374,17 +1128,17 @@ text:
 
 再給妳一次機會。`,
 
-type:"retry",
+  type:"retry",
 
-city:10
+  city:10
 
 },
 
 {
 
-title:"今天值得一個小獎勵 🎁",
+  title:"今天值得一個小獎勵 🎁",
 
-text:
+  text:
 
 `沒有原因也沒關係。
 
@@ -1392,17 +1146,17 @@ text:
 
 上蝦皮挑個喜歡的小東西吧。`,
 
-type:"normal",
+  type:"normal",
 
-city:11
+  city:11
 
 },
 
 {
 
-title:"明天的早餐升級 🍳",
+  title:"明天的早餐升級 🍳",
 
-text:
+  text:
 
 `明天第一餐不要隨便。
 
@@ -1410,17 +1164,17 @@ text:
 
 早餐我來處理。`,
 
-type:"normal",
+  type:"normal",
 
-city:12
+  city:12
 
 },
 
 {
 
-title:"雙倍小開心 ✦✦",
+  title:"雙倍小開心 ✦✦",
 
-text:
+  text:
 
 `今天好像需要多一點。
 
@@ -1430,17 +1184,17 @@ text:
 
 截圖給我。`,
 
-type:"double",
+  type:"double",
 
-city:13
+  city:13
 
 },
 
 {
 
-title:"週末逃跑計畫 🚗",
+  title:"週末逃跑計畫 🚗",
 
-text:
+  text:
 
 `最近如果有點悶，
 
@@ -1450,21 +1204,19 @@ text:
 
 去哪裡之後再決定。`,
 
-type:"normal",
+  type:"normal",
 
-city:14
+  city:14
 
 }
 
 ];
 
-/* 首次限定 */
-
 const firstCard = {
 
-title:"首次限定 ✦",
+  title:"首次限定 ✦",
 
-text:
+  text:
 
 `後續真的有東西唷。
 
@@ -1479,8 +1231,6 @@ text:
 不列入正式抽卡。`
 
 };
-
-/* 紀錄 */
 
 const KEY_FIRST =
 
@@ -1498,7 +1248,7 @@ let currentView = null;
 
 let lastBackground = null;
 
-/* 首頁照片 */
+/* 首頁飛機窗景 */
 
 function setHomeBackground(){
 
@@ -1522,8 +1272,6 @@ function setHomeBackground(){
 
     "center";
 
-  /* 首頁仍然柔和，但比之前清楚 */
-
   document
 
     .getElementById(
@@ -1538,15 +1286,15 @@ function setHomeBackground(){
 
     "180deg," +
 
-    "rgba(255,250,247,.24)," +
+    "rgba(255,250,247,.18)," +
 
-    "rgba(250,248,231,.34)" +
+    "rgba(250,248,231,.26)" +
 
     ")";
 
 }
 
-/* 城市照片 */
+/* 正式卡城市背景 */
 
 function setCityBackground(
 
@@ -1574,14 +1322,6 @@ function setCityBackground(
 
     `url("${SPRITE_BG}")`;
 
-  /*
-
-    3欄 × 5列的大圖。
-
-    一次只顯示其中一格。
-
-  */
-
   bg.style.backgroundSize =
 
     "300% 500%";
@@ -1592,9 +1332,9 @@ function setCityBackground(
 
   /*
 
-    這版城市背景明顯很多。
+    這版重點：
 
-    不再像之前幾乎全白。
+    背景城市明顯提升。
 
   */
 
@@ -1612,9 +1352,9 @@ function setCityBackground(
 
     "180deg," +
 
-    "rgba(255,250,247,.24)," +
+    "rgba(255,250,247,.10)," +
 
-    "rgba(250,248,231,.34)" +
+    "rgba(250,248,231,.16)" +
 
     ")";
 
@@ -1624,7 +1364,7 @@ function setCityBackground(
 
 }
 
-/* 二選一背景 */
+/* 雙倍小開心小卡背景 */
 
 function setMiniBackground(
 
@@ -1704,7 +1444,7 @@ function shuffle(array){
 
 }
 
-/* 建立新一輪 */
+/* 建立15張新一輪 */
 
 function createFreshDeck(){
 
@@ -2026,7 +1766,7 @@ function startFlight(
 
 }
 
-/* 首頁按抽卡 */
+/* 首頁開始抽 */
 
 function startDraw(){
 
@@ -2126,7 +1866,7 @@ function showFirstCard(){
 
 }
 
-/* 我知道了 */
+/* 按我知道了 */
 
 function confirmFirstCard(){
 
@@ -2512,7 +2252,7 @@ function drawDoubleCards(){
 
 }
 
-/* 收下 */
+/* 收下小開心 */
 
 function finishDraw(){
 
@@ -2620,7 +2360,7 @@ function finishDraw(){
 
 }
 
-/* 忘了截圖 */
+/* 等等，我還沒截圖 */
 
 function restoreLastView(){
 
@@ -2806,7 +2546,7 @@ function restoreLastView(){
 
 }
 
-/* 網站載入 */
+/* 網站開啟 */
 
 window.addEventListener(
 
