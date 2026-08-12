@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>LITTLE HAPPINESS</title>
+
+<style>
+:root{
+  --ink:#4f5445;
+  --olive:#8f9d68;
+  --line:rgba(154,164,111,.58);
+  --gold:#c69d39;
+}
+
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  min-height:100%;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+  color:var(--ink);
+}
+
+body{
+  min-height:100svh;
+  background:#f7f3e8;
+  overflow-x:hidden;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
+
+/* 背景固定裁切框：頁面滑動時永遠只顯示一個城市格 */
+#bgPhoto{
+  position:fixed;
+  inset:0;
+  width:100vw;
+  height:100dvh;
+  z-index:0;
+  overflow:hidden;
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:cover;
+}
+
+#cityCanvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:none;
+  pointer-events:none;
+}
+
+#bgVeil{
+  position:fixed;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:rgba(255,250,245,.10);
+}
+
+.page{
+  position:relative;
+  z-index:2;
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:14px;
+}
+
+.shell{
+  width:100%;
+  max-width:285px;
+}
+
+.panel{
+  background:rgba(255,253,247,.90);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:18px 13px 15px;
+  text-align:center;
+  box-shadow:0 14px 32px rgba(70,70,45,.13);
+  backdrop-filter:blur(5px);
+  -webkit-backdrop-filter:blur(5px);
+}
+
+.hidden{display:none!important}
+
+.main-star,.card-star,.end-star{color:var(--gold)}
+
+.main-star{
+  font-size:25px;
+  margin-bottom:13px;
+}
+
+h1{
+  margin:0 0 20px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:25px;
+  font-weight:500;
+  letter-spacing:1.5px;
+  color:#414739;
+}
+
+.intro{
+  font-size:16px;
+  line-height:1.8;
+  margin:0 auto 21px;
+}
+
+button{
+  appearance:none;
+  -webkit-appearance:none;
+  border:0;
+  font-family:inherit;
+  cursor:pointer;
+}
+
+button:active{transform:scale(.97)}
+
+.primary-btn,.secondary-btn{
+  border-radius:999px;
+}
+
+.primary-btn{
+  min-width:210px;
+  padding:13px 20px;
+  background:var(--olive);
+  color:#fff;
+  font-size:16px;
+}
+
+.secondary-btn{
+  margin-top:11px;
+  padding:10px 18px;
+  background:rgba(255,253,247,.9);
+  color:#78845b;
+  border:1px solid #aab585;
+  font-size:14px;
+}
+
+.flight-screen{
+  min-height:220px;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  position:relative;
+}
+
+.flight-route{
+  position:absolute;
+  width:260px;
+  height:150px;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+.route-line{
+  fill:none;
+  stroke:#c5ad6d;
+  stroke-width:1.5;
+  stroke-dasharray:5 7;
+}
+
+.plane{
+  position:absolute;
+  left:25px;
+  top:90px;
+  font-size:27px;
+}
+
+.flight-text{
+  margin-top:120px;
+  font-size:13px;
+}
+
+@keyframes flyPlane{
+  0%{transform:translate(0,15px);opacity:0}
+  15%{opacity:1}
+  100%{transform:translate(205px,-75px);opacity:0}
+}
+
+.result-card{
+  padding:15px 12px;
+  border:1px solid rgba(202,196,155,.85);
+  border-radius:19px;
+  background:rgba(255,253,247,.95);
+  box-shadow:0 8px 20px rgba(74,69,45,.09);
+}
+
+.card-title{
+  font-size:17px;
+  font-weight:650;
+  color:#707b56;
+  margin-bottom:10px;
+}
+
+.card-text{
+  white-space:pre-line;
+  font-size:15.5px;
+  line-height:1.55;
+}
+
+.card-star{
+  font-size:15px;
+  margin-top:8px;
+}
+
+.first-note{
+  font-size:12px;
+  line-height:1.65;
+  color:#858473;
+  margin:15px 0 0;
+}
+
+.double-area{
+  margin-top:13px;
+}
+
+.double-caption{
+  font-size:13px;
+  line-height:1.6;
+}
+
+.mini-card{
+  position:relative;
+  overflow:hidden;
+  margin-top:10px;
+  border-radius:16px;
+  border:1px solid rgba(214,207,168,.9);
+  min-height:175px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.mini-bg{
+  position:absolute;
+  inset:0;
+  background-image:url("cities-sprite.jpg");
+  background-repeat:no-repeat;
+}
+
+.mini-veil{
+  position:absolute;
+  inset:0;
+  background:rgba(255,252,244,.62);
+}
+
+.mini-content{
+  position:relative;
+  z-index:2;
+  padding:16px 12px;
+}
+
+.mini-title{
+  font-size:15px;
+  font-weight:650;
+  color:#6f7956;
+  margin-bottom:8px;
+}
+
+.mini-text{
+  white-space:pre-line;
+  font-size:14px;
+  line-height:1.55;
+}
+
+.small-hint{
+  font-size:11px;
+  margin-top:11px;
+}
+
+.end-star{
+  font-size:27px;
+  margin-bottom:14px;
+}
+
+.end-title{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:20px;
+  margin-bottom:14px;
+}
+
+.end-text{
+  font-size:15px;
+  line-height:1.75;
+}
+
+.back-btn{
+  font-size:13px;
+  background:transparent;
+  color:#858a76;
+  text-decoration:underline;
+  margin-top:15px;
+}
+
+.cat-title-click{
+  cursor:pointer;
+  text-decoration:underline;
+  text-underline-offset:4px;
+}
+.cat-photo-wrap{
+  margin-top:14px;
+  display:none;
+}
+.cat-photo-wrap.show{
+  display:block;
+}
+.cat-photo{
+  display:block;
+  width:100%;
+  border-radius:16px;
+  border:1px solid rgba(202,196,155,.85);
+  box-shadow:0 8px 20px rgba(74,69,45,.10);
+}
+.cat-caption{
+  margin-top:10px;
+  font-size:13px;
+  line-height:1.6;
+  color:#707b56;
+}
+.confession-title{
+  font-size:18px;
+  font-weight:650;
+  color:#707b56;
+  margin-bottom:14px;
+}
+.confession-text{
+  white-space:pre-line;
+  font-size:14.5px;
+  line-height:1.72;
+  text-align:left;
+}
+.confession-final{
+  display:block;
+  margin-top:14px;
+  text-align:center;
+  font-weight:700;
+  color:#707b56;
+}
+</style>
+</head>
+
+<body>
+
+<div id="bgPhoto">
+  <canvas id="cityCanvas"></canvas>
+</div>
+<div id="bgVeil"></div>
+
+<div class="page">
+<div class="shell">
+<div class="panel">
+
+<section id="homeScreen">
+
+<div class="main-star">✦</div>
+
+<h1>LITTLE HAPPINESS</h1>
+
+<p class="intro">
+如果今天剛好少了一點開心，<br>
+就從這裡抽一個吧。
+</p>
+
+<button class="primary-btn" onclick="startDraw()">
+抽一個小開心 ✦
+</button>
+
+</section>
+
+<section id="flightScreen" class="flight-screen">
+
+<svg class="flight-route" viewBox="0 0 300 160">
+<path class="route-line" d="M35 125 C90 70,185 95,270 32"/>
+</svg>
+
+<div class="plane">✈︎</div>
+
+<div class="flight-text">
+正在準備今天的小開心…
+</div>
+
+</section>
+
+<section id="resultScreen" class="hidden">
+
+<div class="result-card">
+<div id="cardTitle" class="card-title"></div>
+<div id="cardText" class="card-text"></div>
+<div class="card-star">✦</div>
+</div>
+
+<div id="catPhotoWrap" class="cat-photo-wrap">
+  <img class="cat-photo" src="cat-egg.jpg" alt="醃蛋蛋">
+  <div class="cat-caption">醃蛋蛋實況轉播🐈</div>
+</div>
+
+<button id="acceptButton" class="secondary-btn hidden" onclick="finishDraw()">
+收下這份小開心 ✦
+</button>
+
+<div id="firstInfo" class="hidden">
+
+<p class="first-note">
+按下「我知道了」後，<br>
+後續再掃 QR Code，<br>
+就開始正式抽卡囉！
+</p>
+
+<button class="secondary-btn" onclick="confirmFirstCard()">
+我知道了 ✦
+</button>
+
+</div>
+
+<button id="retryButton" class="secondary-btn hidden" onclick="drawExtraCard()">
+再抽一次 🎲
+</button>
+
+<button id="doubleButton" class="secondary-btn hidden" onclick="drawDoubleCards()">
+再抽兩張 ✦✦
+</button>
+
+<div id="doubleArea" class="double-area hidden">
+
+<div class="double-caption">
+今天多給妳兩個選擇，<br>
+挑一張比較喜歡的吧。
+</div>
+
+<div class="mini-card">
+<div id="miniBg1" class="mini-bg"></div>
+<div class="mini-veil"></div>
+<div class="mini-content">
+<div id="doubleTitle1" class="mini-title"></div>
+<div id="doubleText1" class="mini-text"></div>
+</div>
+</div>
+
+<div class="mini-card">
+<div id="miniBg2" class="mini-bg"></div>
+<div class="mini-veil"></div>
+<div class="mini-content">
+<div id="doubleTitle2" class="mini-title"></div>
+<div id="doubleText2" class="mini-text"></div>
+</div>
+</div>
+
+<p class="small-hint">
+想用其中一張的話，記得先截圖。
+</p>
+
+<button class="secondary-btn" onclick="finishDraw()">
+收下今天的小開心 ✦
+</button>
+
+</div>
+
+</section>
+
+<section id="endScreen" class="hidden">
+
+<div class="end-star">✦</div>
+
+<div id="endTitle" class="end-title">
+今天的小開心已送達
+</div>
+
+<div id="endText" class="end-text"></div>
+
+<button id="backToLastButton" class="back-btn hidden" onclick="restoreLastView()">
+等等，我還沒截圖 😂
+</button>
+
+</section>
+
+</div>
+</div>
+</div>
+
+<script>
+
+const HOME_BG="home-flight.jpg";
+const SPRITE_BG="cities-sprite.jpg";
+
+/* cities-sprite.jpg 實際分隔線不是等距；以下用實際像素裁切每個城市 */
+const cityPositions=[
+{name:"東京",x:0,y:0,w:289,h:387},
+{name:"京都",x:292,y:0,w:268,h:387},
+{name:"首爾",x:564,y:0,w:289,h:387},
+
+{name:"大阪",x:0,y:389,w:289,h:369},
+{name:"香港",x:292,y:389,w:268,h:369},
+{name:"台北",x:564,y:389,w:289,h:369},
+
+{name:"澳門",x:0,y:760,w:289,h:364},
+{name:"釜山",x:292,y:760,w:268,h:364},
+{name:"清邁",x:564,y:760,w:289,h:364},
+
+{name:"新加坡",x:0,y:1126,w:289,h:357},
+{name:"吉隆坡",x:292,y:1126,w:268,h:357},
+{name:"曼谷",x:564,y:1126,w:289,h:357},
+
+{name:"河內",x:0,y:1486,w:289,h:358},
+{name:"峴港",x:292,y:1486,w:268,h:358},
+{name:"峇里島",x:564,y:1486,w:289,h:358}
+];
+
+const cards=[
+{
+title:"🎉 今天有中！",
+text:`能量補給送給妳。
+
+7-ELEVEN 100元數位商品禮券。`,
+type:"normal",
+city:0
+},
+
+{
+title:"隱藏款 ✦",
+text:`欸，居然被妳抽到了。
+
+今天的小開心，妳自己指定。
+
+（我做得到的範圍內都可）`,
+type:"normal",
+city:1
+},
+
+{
+title:"小兜風 🚗",
+text:`走，不管現在多晚。
+
+瘋狂一下吧。
+
+帶妳小兜風散散心。
+
+想用的時候，截圖給我。`,
+type:"normal",
+city:2
+},
+
+{
+title:"餐點 🍽️",
+text:`不想煩惱吃什麼的話，
+
+截圖給我。
+
+找個時間帶妳去吃。`,
+type:"normal",
+city:3
+},
+
+{
+title:"神秘款 😎",
+text:`這張先截圖傳給我。
+
+其他的先不告訴妳。`,
+type:"normal",
+city:4
+},
+
+{
+title:"飲料我請 🥤",
+text:`想喝什麼就選什麼。
+
+截圖給我，這杯算我的。`,
+type:"normal",
+city:5
+},
+
+{
+title:"👑 任性額度 +1",
+text:`恭喜獲得今日限定權限：
+
+可以有一件事情
+「我爽就好」。
+
+請合理使用 😂`,
+type:"normal",
+city:6
+},
+
+{
+title:"彩蛋 😂",
+text:`恭喜，什麼都沒抽到。
+
+系統表示：
+
+妳今天應該自己就會遇到好事。`,
+type:"normal",
+city:7
+},
+
+{
+title:"抱怨接收券 😤",
+text:`今天很煩的話，
+把這張傳給我。
+
+妳講，我聽。
+
+不一定要找答案。`,
+type:"normal",
+city:8
+},
+
+{
+title:"分享一個可愛的照片（點我）",
+text:`世界以痛待我 我以待以待唷
+
+醃蛋蛋實況轉播🐈`,
+type:"normal",
+city:9
+},
+
+{
+title:"再抽一次 🎲",
+text:`嗯……
+
+我覺得這張不太行。
+
+不算。
+
+再給妳一次機會。`,
+type:"retry",
+city:10
+},
+
+{
+title:"今天值得一個小獎勵 🎁",
+text:`沒有原因也沒關係。
+
+今天就是可以對自己好一點。
+
+上蝦皮挑個喜歡的小東西吧。`,
+type:"normal",
+city:11
+},
+
+{
+title:"明天的早餐升級 🍳",
+text:`明天第一餐不要隨便。
+
+截圖給我。
+
+早餐我來處理。`,
+type:"normal",
+city:12
+},
+
+{
+title:"雙倍小開心 ✦✦",
+text:`今天好像需要多一點。
+
+再抽兩張吧，
+
+挑一張妳比較喜歡的。
+
+截圖給我。`,
+type:"double",
+city:13
+},
+
+{
+title:"週末逃跑計畫 🚗",
+text:`最近如果有點悶，
+
+截圖給我。
+
+找個週末出去晃晃，
+
+去哪裡之後再決定。`,
+type:"normal",
+city:14
+}
+];
+
+const firstCard={
+title:"首次限定 ✦",
+text:`後續真的有東西唷。
+
+請謹慎使用 😂
+
+投資理財有賺有賠，
+
+抽卡時應詳閱公開說明書。
+
+本次為首次體驗，
+不列入正式抽卡。`
+};
+
+const KEY_FIRST="littleHappiness_firstSeen_v3";
+const KEY_DECK="littleHappiness_remaining_v3";
+const KEY_LAST="littleHappiness_lastCard_v3";
+const KEY_DRAW_COUNT="littleHappiness_drawCount_v1";
+const KEY_CONFESSION_SEEN="littleHappiness_confessionSeen_v1";
+
+let currentView=null;
+let lastBackground=null;
+
+const cityImage=new Image();
+cityImage.src=SPRITE_BG;
+let currentCityIndex=null;
+
+function resizeCityCanvas(){
+  if(currentCityIndex===null)return;
+  drawCityToCanvas(currentCityIndex);
+}
+
+function drawCityToCanvas(cityIndex){
+  const p=cityPositions[cityIndex];
+  const canvas=document.getElementById("cityCanvas");
+  const ctx=canvas.getContext("2d");
+
+  const dpr=Math.min(window.devicePixelRatio||1,2);
+  const cw=Math.max(1,Math.round(window.innerWidth*dpr));
+  const ch=Math.max(1,Math.round(window.innerHeight*dpr));
+
+  if(canvas.width!==cw)canvas.width=cw;
+  if(canvas.height!==ch)canvas.height=ch;
+
+  ctx.clearRect(0,0,cw,ch);
+
+  /* cover 裁切，但固定左下角，確保城市名稱不被切掉 */
+  const scale=Math.max(cw/p.w,ch/p.h);
+  const dw=p.w*scale;
+  const dh=p.h*scale;
+  const dx=0;
+  const dy=ch-dh;
+
+  ctx.drawImage(
+    cityImage,
+    p.x,p.y,p.w,p.h,
+    dx,dy,dw,dh
+  );
+}
+
+function setHomeBackground(){
+  const bg=document.getElementById("bgPhoto");
+  const canvas=document.getElementById("cityCanvas");
+
+  currentCityIndex=null;
+  canvas.style.display="none";
+
+  bg.style.backgroundImage=`url("${HOME_BG}")`;
+  bg.style.backgroundSize="cover";
+  bg.style.backgroundPosition="center";
+}
+
+function setCityBackground(cityIndex){
+  const bg=document.getElementById("bgPhoto");
+  const canvas=document.getElementById("cityCanvas");
+
+  currentCityIndex=cityIndex;
+  bg.style.backgroundImage="none";
+  canvas.style.display="block";
+
+  const draw=()=>drawCityToCanvas(cityIndex);
+
+  if(cityImage.complete && cityImage.naturalWidth){
+    draw();
+  }else{
+    cityImage.onload=draw;
+  }
+
+  lastBackground=cityIndex;
+}
+
+function setMiniBackground(element,cityIndex){
+  /* 雙倍卡的小縮圖維持原本顯示方式 */
+  const p=cityPositions[cityIndex];
+  const col=cityIndex%3;
+  const row=Math.floor(cityIndex/3);
+  const x=col===0?0:(col===1?50:100);
+  const y=row===0?0:(row===1?25:(row===2?50:(row===3?75:100)));
+
+  element.style.backgroundSize="300% 500%";
+  element.style.backgroundPosition=`${x}% ${y}%`;
+}
+
+window.addEventListener("resize",resizeCityCanvas);
+window.addEventListener("orientationchange",()=>setTimeout(resizeCityCanvas,120));
+
+
+function getDrawCount(){
+  return Number(localStorage.getItem(KEY_DRAW_COUNT)||0);
+}
+
+function addDrawCount(){
+  const count=getDrawCount()+1;
+  localStorage.setItem(KEY_DRAW_COUNT,String(count));
+  return count;
+}
+
+function showConfessionCard(){
+  hideAll();
+  resetActions();
+  setCityBackground(1);
+
+  const resultScreen=document.getElementById("resultScreen");
+  resultScreen.classList.remove("hidden");
+
+  const title=document.getElementById("cardTitle");
+  const body=document.getElementById("cardText");
+  const photoWrap=document.getElementById("catPhotoWrap");
+
+  if(photoWrap) photoWrap.classList.remove("show");
+
+  title.className="confession-title";
+  title.onclick=null;
+  title.innerText="第 52 次・隱藏彩蛋 ✦";
+
+  body.className="confession-text";
+  body.innerHTML=`鈺欣：
+
+看來妳終於到這裡了。
+
+一直以來，我都很喜歡妳。
+
+那時候我曾經試過很多方式想讓自己放下，
+但兜了一圈之後才發現，我好像還是做不到。
+
+我還是只想喜歡妳。
+
+這段時間，我也慢慢學著怎麼把自己的心意收好。
+在不讓妳有壓力的情況下，適當地表達，
+也默默陪在妳身邊。
+
+我不知道妳看到這段話的時候，
+我們已經走到什麼樣的關係了。
+
+但如果最後只能是朋友，
+我也很樂意繼續用這個身份和妳相處、陪著彼此成長。
+
+只是既然妳都走到第 52 次了，
+有一句話，我還是想讓妳知道。
+
+<span class="confession-final">我還是很喜歡妳。</span>`;
+
+  document.getElementById("acceptButton").classList.remove("hidden");
+  currentView=null;
+}
+
+function prepareCatCardIfNeeded(card){
+  const title=document.getElementById("cardTitle");
+  const body=document.getElementById("cardText");
+  const photoWrap=document.getElementById("catPhotoWrap");
+
+  if(photoWrap) photoWrap.classList.remove("show");
+
+  title.className="card-title";
+  title.onclick=null;
+  body.className="card-text";
+
+  if(card && card.city===9 && card.title.includes("分享一個可愛的照片")){
+    title.classList.add("cat-title-click");
+    title.onclick=()=>{
+      if(photoWrap) photoWrap.classList.toggle("show");
+    };
+  }
+}
+
+function shuffle(array){
+
+const arr=[...array];
+
+for(let i=arr.length-1;i>0;i--){
+
+const j=Math.floor(Math.random()*(i+1));
+
+[arr[i],arr[j]]=[arr[j],arr[i]];
+
+}
+
+return arr;
+
+}
+
+function createFreshDeck(){
+
+let indexes=shuffle(cards.map((_,index)=>index));
+
+const last=localStorage.getItem(KEY_LAST);
+
+if(
+last!==null &&
+indexes.length>1 &&
+indexes[0]===Number(last)
+){
+
+[indexes[0],indexes[1]]=[indexes[1],indexes[0]];
+
+}
+
+localStorage.setItem(KEY_DECK,JSON.stringify(indexes));
+
+return indexes;
+
+}
+
+function takeOneCard(){
+
+let deck;
+
+try{
+
+deck=JSON.parse(localStorage.getItem(KEY_DECK));
+
+}catch(e){
+
+deck=null;
+
+}
+
+if(!Array.isArray(deck)||deck.length===0){
+
+deck=createFreshDeck();
+
+}
+
+const index=deck.shift();
+
+localStorage.setItem(KEY_DECK,JSON.stringify(deck));
+
+localStorage.setItem(KEY_LAST,String(index));
+
+return{
+index:index,
+card:cards[index]
+};
+
+}
+
+function hideAll(){
+
+document.getElementById("homeScreen").classList.add("hidden");
+
+document.getElementById("flightScreen").style.display="none";
+
+document.getElementById("resultScreen").classList.add("hidden");
+
+document.getElementById("endScreen").classList.add("hidden");
+
+}
+
+function resetActions(){
+
+[
+"acceptButton",
+"retryButton",
+"doubleButton",
+"firstInfo",
+"doubleArea"
+].forEach(id=>{
+
+document.getElementById(id).classList.add("hidden");
+
+});
+
+}
+
+function startFlight(callback){
+
+hideAll();
+
+const flight=document.getElementById("flightScreen");
+
+flight.style.display="flex";
+
+const plane=flight.querySelector(".plane");
+
+plane.style.animation="none";
+
+void plane.offsetWidth;
+
+plane.style.animation="flyPlane 1.35s cubic-bezier(.25,.6,.35,1) forwards";
+
+setTimeout(()=>{
+
+flight.style.display="none";
+
+callback();
+
+},1400);
+
+}
+
+function startDraw(){
+
+startFlight(()=>{
+
+if(!localStorage.getItem(KEY_FIRST)){
+
+showFirstCard();
+
+}else{
+
+drawOfficialCard();
+
+}
+
+});
+
+}
+
+function showFirstCard(){
+
+const count=addDrawCount();
+
+if(
+count===52 &&
+localStorage.getItem(KEY_CONFESSION_SEEN)!=="yes"
+){
+  localStorage.setItem(KEY_CONFESSION_SEEN,"yes");
+  showConfessionCard();
+  return;
+}
+
+resetActions();
+
+setHomeBackground();
+
+document.getElementById("resultScreen").classList.remove("hidden");
+
+prepareCatCardIfNeeded(null);
+
+document.getElementById("cardTitle").innerText=firstCard.title;
+
+document.getElementById("cardText").innerText=firstCard.text;
+
+document.getElementById("firstInfo").classList.remove("hidden");
+
+currentView=null;
+
+}
+
+function confirmFirstCard(){
+
+localStorage.setItem(KEY_FIRST,"yes");
+
+hideAll();
+
+setHomeBackground();
+
+document.getElementById("endScreen").classList.remove("hidden");
+
+document.getElementById("endTitle").innerText="設定完成 ✦";
+
+document.getElementById("endText").innerHTML=
+"下次再掃 QR Code，<br>就開始正式抽卡囉！";
+
+document.getElementById("backToLastButton").classList.add("hidden");
+
+}
+
+function drawOfficialCard(){
+
+const count=addDrawCount();
+
+if(
+count===52 &&
+localStorage.getItem(KEY_CONFESSION_SEEN)!=="yes"
+){
+  localStorage.setItem(KEY_CONFESSION_SEEN,"yes");
+  showConfessionCard();
+  return;
+}
+
+const result=takeOneCard();
+
+showCard(
+result.index,
+result.card,
+true
+);
+
+}
+
+function showCard(index,card,saveView){
+
+resetActions();
+
+setCityBackground(card.city);
+
+document.getElementById("resultScreen").classList.remove("hidden");
+
+prepareCatCardIfNeeded(card);
+
+document.getElementById("cardTitle").innerText=card.title;
+
+document.getElementById("cardText").innerText=card.text;
+
+if(card.type==="retry"){
+
+document.getElementById("retryButton").classList.remove("hidden");
+
+}else if(card.type==="double"){
+
+document.getElementById("doubleButton").classList.remove("hidden");
+
+}else{
+
+document.getElementById("acceptButton").classList.remove("hidden");
+
+}
+
+if(saveView){
+
+currentView={
+kind:"single",
+index:index
+};
+
+}
+
+}
+
+function drawExtraCard(){
+
+startFlight(()=>{
+
+const count=addDrawCount();
+
+if(
+count===52 &&
+localStorage.getItem(KEY_CONFESSION_SEEN)!=="yes"
+){
+  localStorage.setItem(KEY_CONFESSION_SEEN,"yes");
+  showConfessionCard();
+  return;
+}
+
+const result=takeOneCard();
+
+showCard(
+result.index,
+result.card,
+true
+);
+
+});
+
+}
+
+function drawDoubleCards(){
+
+const first=takeOneCard();
+
+const second=takeOneCard();
+
+resetActions();
+
+document.getElementById("doubleArea").classList.remove("hidden");
+
+document.getElementById("doubleTitle1").innerText=first.card.title;
+
+document.getElementById("doubleText1").innerText=first.card.text;
+
+setMiniBackground(
+document.getElementById("miniBg1"),
+first.card.city
+);
+
+document.getElementById("doubleTitle2").innerText=second.card.title;
+
+document.getElementById("doubleText2").innerText=second.card.text;
+
+setMiniBackground(
+document.getElementById("miniBg2"),
+second.card.city
+);
+
+currentView={
+kind:"double",
+first:first.index,
+second:second.index,
+base:lastBackground
+};
+
+}
+
+function finishDraw(){
+
+hideAll();
+
+if(lastBackground!==null){
+
+setCityBackground(lastBackground);
+
+}
+
+document.getElementById("endScreen").classList.remove("hidden");
+
+document.getElementById("endTitle").innerText=
+"今天的小開心已送達 ✦";
+
+document.getElementById("endText").innerHTML=
+"希望有讓今天<br>"+
+"多一點點開心。<br><br>"+
+"下次想起來的時候，<br>"+
+"再來吧。";
+
+if(currentView){
+
+document.getElementById("backToLastButton").classList.remove("hidden");
+
+}else{
+
+document.getElementById("backToLastButton").classList.add("hidden");
+
+}
+
+}
+
+function restoreLastView(){
+
+if(!currentView)return;
+
+hideAll();
+
+if(currentView.kind==="single"){
+
+const card=cards[currentView.index];
+
+showCard(
+currentView.index,
+card,
+false
+);
+
+}else{
+
+const card1=cards[currentView.first];
+
+const card2=cards[currentView.second];
+
+setCityBackground(
+currentView.base ?? card1.city
+);
+
+document.getElementById("resultScreen").classList.remove("hidden");
+
+resetActions();
+
+document.getElementById("doubleArea").classList.remove("hidden");
+
+document.getElementById("doubleTitle1").innerText=card1.title;
+
+document.getElementById("doubleText1").innerText=card1.text;
+
+setMiniBackground(
+document.getElementById("miniBg1"),
+card1.city
+);
+
+document.getElementById("doubleTitle2").innerText=card2.title;
+
+document.getElementById("doubleText2").innerText=card2.text;
+
+setMiniBackground(
+document.getElementById("miniBg2"),
+card2.city
+);
+
+}
+
+}
+
+window.addEventListener("DOMContentLoaded",()=>{
+
+setHomeBackground();
+
+});
+
+</script>
+
+</body>
+</html>
