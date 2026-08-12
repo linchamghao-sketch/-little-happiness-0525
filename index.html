@@ -299,9 +299,36 @@ button:active{transform:scale(.97)}
   margin-top:15px;
 }
 
-.confession-title{font-size:18px;font-weight:650;color:#707b56;margin-bottom:14px}
-.confession-text{white-space:pre-line;font-size:14.5px;line-height:1.72;text-align:left}
-.confession-final{display:block;margin-top:14px;text-align:center;font-weight:700;color:#707b56}
+.cat-title-click{
+  cursor:pointer;
+  text-decoration:underline;
+  text-underline-offset:4px;
+}
+
+.cat-photo-wrap{
+  margin-top:14px;
+  display:none;
+}
+
+.cat-photo-wrap.show{
+  display:block;
+}
+
+.cat-photo{
+  display:block;
+  width:100%;
+  border-radius:16px;
+  border:1px solid rgba(202,196,155,.85);
+  box-shadow:0 8px 20px rgba(74,69,45,.10);
+}
+
+.cat-caption{
+  margin-top:10px;
+  font-size:13px;
+  line-height:1.6;
+  color:#707b56;
+}
+
 </style>
 </head>
 
@@ -353,6 +380,11 @@ button:active{transform:scale(.97)}
 <div id="cardTitle" class="card-title"></div>
 <div id="cardText" class="card-text"></div>
 <div class="card-star">✦</div>
+</div>
+
+<div id="catPhotoWrap" class="cat-photo-wrap">
+  <img class="cat-photo" src="cat-egg.jpg" alt="醃蛋蛋">
+  <div class="cat-caption">醃蛋蛋實況轉播🐈</div>
 </div>
 
 <button id="acceptButton" class="secondary-btn hidden" onclick="finishDraw()">
@@ -1109,51 +1141,38 @@ card2.city
 }
 
 
-function showConfessionPreview(){
+function showCatPreview(){
   hideAll();
   resetActions();
-  setCityBackground(1);
+
+  setCityBackground(9);
+
   document.getElementById("resultScreen").classList.remove("hidden");
 
   const title=document.getElementById("cardTitle");
   const body=document.getElementById("cardText");
+  const photoWrap=document.getElementById("catPhotoWrap");
 
-  title.className="confession-title";
-  title.innerText="第 52 次・隱藏彩蛋 ✦";
+  title.className="card-title cat-title-click";
+  title.innerText="分享一個可愛的照片（點我）";
 
-  body.className="confession-text";
-  body.innerHTML=`鈺欣：
+  body.className="card-text";
+  body.innerText=`世界以痛待我 我以待以待唷
 
-看來妳終於到這裡了。
+醃蛋蛋實況轉播🐈`;
 
-一直以來，我都很喜歡妳。
+  photoWrap.classList.remove("show");
 
-那時候我曾經試過很多方式想讓自己放下，
-但兜了一圈之後才發現，我好像還是做不到。
-
-我還是只想喜歡妳。
-
-這段時間，我也慢慢學著怎麼把自己的心意收好。
-在不讓妳有壓力的情況下，適當地表達，
-也默默陪在妳身邊。
-
-我不知道妳看到這段話的時候，
-我們已經走到什麼樣的關係了。
-
-但如果最後只能是朋友，
-我也很樂意繼續用這個身份和妳相處、陪著彼此成長。
-
-只是既然妳都走到第 52 次了，
-有一句話，我還是想讓妳知道。
-
-<span class="confession-final">我還是很喜歡妳。</span>`;
+  title.onclick=()=>{
+    photoWrap.classList.toggle("show");
+  };
 
   document.getElementById("acceptButton").classList.remove("hidden");
 }
 
 window.addEventListener("DOMContentLoaded",()=>{
 
-showConfessionPreview();
+showCatPreview();
 
 });
 
