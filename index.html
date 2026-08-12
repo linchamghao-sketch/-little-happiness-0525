@@ -318,12 +318,6 @@ button:active{transform:scale(.97)}
   border:1px solid rgba(202,196,155,.85);
   box-shadow:0 8px 20px rgba(74,69,45,.10);
 }
-.cat-caption{
-  margin-top:10px;
-  font-size:13px;
-  line-height:1.6;
-  color:#707b56;
-}
 .confession-title{
   font-size:18px;
   font-weight:650;
@@ -398,7 +392,6 @@ button:active{transform:scale(.97)}
 
 <div id="catPhotoWrap" class="cat-photo-wrap">
   <img class="cat-photo" src="cat-egg.jpg" alt="醃蛋蛋">
-  <div class="cat-caption">醃蛋蛋實況轉播🐈</div>
 </div>
 
 <button id="acceptButton" class="secondary-btn hidden" onclick="finishDraw()">
@@ -798,6 +791,25 @@ function addDrawCount(){
   return count;
 }
 
+function prepareCatCardIfNeeded(card){
+  const title=document.getElementById("cardTitle");
+  const body=document.getElementById("cardText");
+  const photoWrap=document.getElementById("catPhotoWrap");
+
+  if(photoWrap) photoWrap.classList.remove("show");
+
+  title.className="card-title";
+  title.onclick=null;
+  body.className="card-text";
+
+  if(card && card.title.includes("分享一個可愛的照片")){
+    title.classList.add("cat-title-click");
+    title.onclick=()=>{
+      if(photoWrap) photoWrap.classList.toggle("show");
+    };
+  }
+}
+
 function showConfessionCard(){
   hideAll();
   resetActions();
@@ -845,25 +857,6 @@ function showConfessionCard(){
 
   document.getElementById("acceptButton").classList.remove("hidden");
   currentView=null;
-}
-
-function prepareCatCardIfNeeded(card){
-  const title=document.getElementById("cardTitle");
-  const body=document.getElementById("cardText");
-  const photoWrap=document.getElementById("catPhotoWrap");
-
-  if(photoWrap) photoWrap.classList.remove("show");
-
-  title.className="card-title";
-  title.onclick=null;
-  body.className="card-text";
-
-  if(card && card.city===9 && card.title.includes("分享一個可愛的照片")){
-    title.classList.add("cat-title-click");
-    title.onclick=()=>{
-      if(photoWrap) photoWrap.classList.toggle("show");
-    };
-  }
 }
 
 function shuffle(array){
