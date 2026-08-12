@@ -48,8 +48,8 @@ body{
   position:absolute;
   top:0;
   left:0;
-  width:300vw;
-  height:500dvh;
+  width:306vw;
+  height:510dvh;
   max-width:none;
   display:none;
   pointer-events:none;
@@ -682,7 +682,7 @@ bg.style.backgroundImage="none";
 sprite.style.display="block";
 
 /* 每一格 = 1 個 viewport；裁切框固定，所以上下滑也不會露出隔壁城市 */
-sprite.style.transform=`translate3d(${-p.col * 100}vw, ${-p.row * 100}dvh, 0)`;
+sprite.style.transform=`translate3d(${-(p.col * 102 + 1)}vw, ${-(p.row * 102 + 1)}dvh, 0)`;
 
 lastBackground=cityIndex;
 
