@@ -43,18 +43,13 @@ body{
   background-size:cover;
 }
 
-/* 整張 3×5 sprite 放進固定裁切框，使用 transform 精準移動到指定格 */
-#citySprite{
+#cityCanvas{
   position:absolute;
-  top:0;
-  left:0;
-  width:306vw;
-  height:510dvh;
-  max-width:none;
+  inset:0;
+  width:100%;
+  height:100%;
   display:none;
   pointer-events:none;
-  user-select:none;
-  -webkit-user-drag:none;
 }
 
 #bgVeil{
@@ -309,7 +304,7 @@ button:active{transform:scale(.97)}
 <body>
 
 <div id="bgPhoto">
-  <img id="citySprite" src="cities-sprite.jpg" alt="">
+  <canvas id="cityCanvas"></canvas>
 </div>
 <div id="bgVeil"></div>
 
@@ -444,27 +439,27 @@ button:active{transform:scale(.97)}
 const HOME_BG="home-flight.jpg";
 const SPRITE_BG="cities-sprite.jpg";
 
-/* 3欄 × 5列，直接用欄/列定位，不再用 background-position 百分比 */
+/* cities-sprite.jpg 實際分隔線不是等距；以下用實際像素裁切每個城市 */
 const cityPositions=[
-{name:"東京",col:0,row:0},
-{name:"京都",col:1,row:0},
-{name:"首爾",col:2,row:0},
+{name:"東京",x:0,y:0,w:289,h:387},
+{name:"京都",x:292,y:0,w:268,h:387},
+{name:"首爾",x:564,y:0,w:289,h:387},
 
-{name:"大阪",col:0,row:1},
-{name:"香港",col:1,row:1},
-{name:"台北",col:2,row:1},
+{name:"大阪",x:0,y:389,w:289,h:369},
+{name:"香港",x:292,y:389,w:268,h:369},
+{name:"台北",x:564,y:389,w:289,h:369},
 
-{name:"澳門",col:0,row:2},
-{name:"釜山",col:1,row:2},
-{name:"清邁",col:2,row:2},
+{name:"澳門",x:0,y:760,w:289,h:364},
+{name:"釜山",x:292,y:760,w:268,h:364},
+{name:"清邁",x:564,y:760,w:289,h:364},
 
-{name:"新加坡",col:0,row:3},
-{name:"吉隆坡",col:1,row:3},
-{name:"曼谷",col:2,row:3},
+{name:"新加坡",x:0,y:1126,w:289,h:357},
+{name:"吉隆坡",x:292,y:1126,w:268,h:357},
+{name:"曼谷",x:564,y:1126,w:289,h:357},
 
-{name:"河內",col:0,row:4},
-{name:"峴港",col:1,row:4},
-{name:"峇里島",col:2,row:4}
+{name:"河內",x:0,y:1486,w:289,h:358},
+{name:"峴港",x:292,y:1486,w:268,h:358},
+{name:"峇里島",x:564,y:1486,w:289,h:358}
 ];
 
 const cards=[
@@ -660,47 +655,88 @@ const KEY_LAST="littleHappiness_lastCard_v3";
 let currentView=null;
 let lastBackground=null;
 
+const cityImage=new Image();
+cityImage.src=SPRITE_BG;
+let currentCityIndex=null;
+
+function resizeCityCanvas(){
+  if(currentCityIndex===null)return;
+  drawCityToCanvas(currentCityIndex);
+}
+
+function drawCityToCanvas(cityIndex){
+  const p=cityPositions[cityIndex];
+  const canvas=document.getElementById("cityCanvas");
+  const ctx=canvas.getContext("2d");
+
+  const dpr=Math.min(window.devicePixelRatio||1,2);
+  const cw=Math.max(1,Math.round(window.innerWidth*dpr));
+  const ch=Math.max(1,Math.round(window.innerHeight*dpr));
+
+  if(canvas.width!==cw)canvas.width=cw;
+  if(canvas.height!==ch)canvas.height=ch;
+
+  ctx.clearRect(0,0,cw,ch);
+
+  /* cover 裁切，但固定左下角，確保城市名稱不被切掉 */
+  const scale=Math.max(cw/p.w,ch/p.h);
+  const dw=p.w*scale;
+  const dh=p.h*scale;
+  const dx=0;
+  const dy=ch-dh;
+
+  ctx.drawImage(
+    cityImage,
+    p.x,p.y,p.w,p.h,
+    dx,dy,dw,dh
+  );
+}
+
 function setHomeBackground(){
+  const bg=document.getElementById("bgPhoto");
+  const canvas=document.getElementById("cityCanvas");
 
-const bg=document.getElementById("bgPhoto");
-const sprite=document.getElementById("citySprite");
+  currentCityIndex=null;
+  canvas.style.display="none";
 
-sprite.style.display="none";
-bg.style.backgroundImage=`url("${HOME_BG}")`;
-bg.style.backgroundSize="cover";
-bg.style.backgroundPosition="center";
-
+  bg.style.backgroundImage=`url("${HOME_BG}")`;
+  bg.style.backgroundSize="cover";
+  bg.style.backgroundPosition="center";
 }
 
 function setCityBackground(cityIndex){
+  const bg=document.getElementById("bgPhoto");
+  const canvas=document.getElementById("cityCanvas");
 
-const p=cityPositions[cityIndex];
-const bg=document.getElementById("bgPhoto");
-const sprite=document.getElementById("citySprite");
+  currentCityIndex=cityIndex;
+  bg.style.backgroundImage="none";
+  canvas.style.display="block";
 
-bg.style.backgroundImage="none";
-sprite.style.display="block";
+  const draw=()=>drawCityToCanvas(cityIndex);
 
-/* 每一格 = 1 個 viewport；裁切框固定，所以上下滑也不會露出隔壁城市 */
-sprite.style.transform=`translate3d(${-(p.col * 102 + 1)}vw, ${-(p.row * 102 + 1)}dvh, 0)`;
+  if(cityImage.complete && cityImage.naturalWidth){
+    draw();
+  }else{
+    cityImage.onload=draw;
+  }
 
-lastBackground=cityIndex;
-
+  lastBackground=cityIndex;
 }
 
 function setMiniBackground(element,cityIndex){
+  /* 雙倍卡的小縮圖維持原本顯示方式 */
+  const p=cityPositions[cityIndex];
+  const col=cityIndex%3;
+  const row=Math.floor(cityIndex/3);
+  const x=col===0?0:(col===1?50:100);
+  const y=row===0?0:(row===1?25:(row===2?50:(row===3?75:100)));
 
-const p=cityPositions[cityIndex];
-
-/* mini-card 仍用原本 sprite 切法；它本身有 overflow:hidden，不影響主背景 */
-element.style.backgroundSize="300% 500%";
-
-const x=p.col===0 ? 0 : (p.col===1 ? 50 : 100);
-const y=p.row===0 ? 0 : (p.row===1 ? 25 : (p.row===2 ? 50 : (p.row===3 ? 75 : 100)));
-
-element.style.backgroundPosition=`${x}% ${y}%`;
-
+  element.style.backgroundSize="300% 500%";
+  element.style.backgroundPosition=`${x}% ${y}%`;
 }
+
+window.addEventListener("resize",resizeCityCanvas);
+window.addEventListener("orientationchange",()=>setTimeout(resizeCityCanvas,120));
 
 function shuffle(array){
 
