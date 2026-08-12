@@ -685,12 +685,13 @@ text:`後續真的有東西唷。
 抽卡時應詳閱公開說明書。
 
 本次為首次體驗，
-不列入正式抽卡。`
+之後就開始正式抽卡。`
 };
 
 const KEY_FIRST="littleHappiness_firstSeen_v3";
-const KEY_DECK="littleHappiness_remaining_v3";
+const KEY_DECK="littleHappiness_remaining_v4";
 const KEY_LAST="littleHappiness_lastCard_v3";
+const KEY_CYCLE_SEEN="littleHappiness_cycleSeen_v1";
 const KEY_DRAW_COUNT="littleHappiness_drawCount_v1";
 const KEY_CONFESSION_SEEN="littleHappiness_confessionSeen_v1";
 
@@ -875,20 +876,59 @@ return arr;
 
 }
 
-function createFreshDeck(){
+function getCycleSeen(){
 
-let indexes=shuffle(cards.map((_,index)=>index));
+let seen;
 
+try{
+  seen=JSON.parse(localStorage.getItem(KEY_CYCLE_SEEN));
+}catch(e){
+  seen=[];
+}
+
+if(!Array.isArray(seen)){
+  seen=[];
+}
+
+/* 只接受有效且不重複的卡片索引 */
+seen=[...new Set(
+  seen.filter(index=>
+    Number.isInteger(index) &&
+    index>=0 &&
+    index<cards.length
+  )
+)];
+
+if(seen.length>=cards.length){
+  seen=[];
+}
+
+localStorage.setItem(KEY_CYCLE_SEEN,JSON.stringify(seen));
+
+return seen;
+
+}
+
+function buildDeckFromSeen(seen){
+
+const seenSet=new Set(seen);
+
+let indexes=shuffle(
+  cards
+    .map((_,index)=>index)
+    .filter(index=>!seenSet.has(index))
+);
+
+/* 新一輪的第一張不要和上一輪最後一張相同 */
 const last=localStorage.getItem(KEY_LAST);
 
 if(
+seen.length===0 &&
 last!==null &&
 indexes.length>1 &&
 indexes[0]===Number(last)
 ){
-
-[indexes[0],indexes[1]]=[indexes[1],indexes[0]];
-
+  [indexes[0],indexes[1]]=[indexes[1],indexes[0]];
 }
 
 localStorage.setItem(KEY_DECK,JSON.stringify(indexes));
@@ -899,33 +939,53 @@ return indexes;
 
 function takeOneCard(){
 
+let seen=getCycleSeen();
 let deck;
 
 try{
-
-deck=JSON.parse(localStorage.getItem(KEY_DECK));
-
+  deck=JSON.parse(localStorage.getItem(KEY_DECK));
 }catch(e){
-
-deck=null;
-
+  deck=null;
 }
 
-if(!Array.isArray(deck)||deck.length===0){
+const seenSet=new Set(seen);
 
-deck=createFreshDeck();
+/*
+  牌組完整性檢查：
+  1. 必須是陣列
+  2. 每個索引都有效
+  3. 牌組內不可重複
+  4. 不可包含本輪已抽過的卡
+  5. 剩餘張數必須正確
+  任一條件不符就只從「本輪尚未抽過」的卡重建，
+  因此同一輪 15 張內不可能重複。
+*/
+const deckIsValid=
+  Array.isArray(deck) &&
+  deck.every(index=>
+    Number.isInteger(index) &&
+    index>=0 &&
+    index<cards.length &&
+    !seenSet.has(index)
+  ) &&
+  new Set(deck).size===deck.length &&
+  deck.length===cards.length-seen.length;
 
+if(!deckIsValid || deck.length===0){
+  deck=buildDeckFromSeen(seen);
 }
 
 const index=deck.shift();
 
-localStorage.setItem(KEY_DECK,JSON.stringify(deck));
+seen.push(index);
 
+localStorage.setItem(KEY_DECK,JSON.stringify(deck));
+localStorage.setItem(KEY_CYCLE_SEEN,JSON.stringify(seen));
 localStorage.setItem(KEY_LAST,String(index));
 
 return{
-index:index,
-card:cards[index]
+  index:index,
+  card:cards[index]
 };
 
 }
