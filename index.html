@@ -691,11 +691,11 @@ text:`後續真的有東西唷。
 };
 
 const KEY_FIRST="littleHappiness_firstSeen_final";
-const KEY_DECK="littleHappiness_remaining_v5";
-const KEY_LAST="littleHappiness_lastCard_v4";
-const KEY_CYCLE_SEEN="littleHappiness_cycleSeen_v2";
-const KEY_DRAW_COUNT="littleHappiness_drawCount_v2";
-const KEY_CONFESSION_SEEN="littleHappiness_confessionSeen_v2";
+const KEY_DECK="littleHappiness_remaining_final20_v1";
+const KEY_LAST="littleHappiness_lastCard_final20_v1";
+const KEY_CYCLE_SEEN="littleHappiness_cycleSeen_final20_v1";
+const KEY_DRAW_COUNT="littleHappiness_drawCount_final20_v1";
+const KEY_CONFESSION_SEEN="littleHappiness_confessionSeen_final20_v1";
 
 let currentView=null;
 let lastBackground=null;
@@ -783,6 +783,14 @@ function setMiniBackground(element,cityIndex){
 window.addEventListener("resize",resizeCityCanvas);
 window.addEventListener("orientationchange",()=>setTimeout(resizeCityCanvas,120));
 
+
+
+function initializeFinalTracking(){
+  if(localStorage.getItem(KEY_DRAW_COUNT)===null){
+    const firstAlreadySeen=localStorage.getItem(KEY_FIRST)==="yes";
+    localStorage.setItem(KEY_DRAW_COUNT,firstAlreadySeen ? "1" : "0");
+  }
+}
 
 function getDrawCount(){
   return Number(localStorage.getItem(KEY_DRAW_COUNT)||0);
@@ -1329,6 +1337,7 @@ card2.city
 
 window.addEventListener("DOMContentLoaded",()=>{
 
+initializeFinalTracking();
 setHomeBackground();
 
 });
