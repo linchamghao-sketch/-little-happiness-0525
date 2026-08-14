@@ -690,7 +690,7 @@ text:`後續真的有東西唷。
 之後就開始正式抽卡。`
 };
 
-const KEY_FIRST="littleHappiness_firstSeen_v4";
+const KEY_FIRST="littleHappiness_firstSeen_v3";
 const KEY_DECK="littleHappiness_remaining_v5";
 const KEY_LAST="littleHappiness_lastCard_v4";
 const KEY_CYCLE_SEEN="littleHappiness_cycleSeen_v2";
@@ -829,7 +829,7 @@ function showConfessionCard(){
 
   title.className="confession-title";
   title.onclick=null;
-  title.innerText="第 52 次・隱藏彩蛋 ✦";
+  title.innerText="第 20 次・隱藏彩蛋 ✦";
 
   body.className="confession-text";
   body.innerHTML=`鈺欣：
@@ -1069,7 +1069,7 @@ function showFirstCard(){
 const count=addDrawCount();
 
 if(
-count===52 &&
+count===20 &&
 localStorage.getItem(KEY_CONFESSION_SEEN)!=="yes"
 ){
   localStorage.setItem(KEY_CONFESSION_SEEN,"yes");
@@ -1119,7 +1119,7 @@ function drawOfficialCard(){
 const count=addDrawCount();
 
 if(
-count===52 &&
+count===20 &&
 localStorage.getItem(KEY_CONFESSION_SEEN)!=="yes"
 ){
   localStorage.setItem(KEY_CONFESSION_SEEN,"yes");
@@ -1183,7 +1183,7 @@ startFlight(()=>{
 const count=addDrawCount();
 
 if(
-count===52 &&
+count===20 &&
 localStorage.getItem(KEY_CONFESSION_SEEN)!=="yes"
 ){
   localStorage.setItem(KEY_CONFESSION_SEEN,"yes");
