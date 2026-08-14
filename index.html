@@ -690,12 +690,12 @@ text:`後續真的有東西唷。
 之後就開始正式抽卡。`
 };
 
-const KEY_FIRST="littleHappiness_firstSeen_final";
-const KEY_DECK="littleHappiness_remaining_final20_v1";
-const KEY_LAST="littleHappiness_lastCard_final20_v1";
-const KEY_CYCLE_SEEN="littleHappiness_cycleSeen_final20_v1";
-const KEY_DRAW_COUNT="littleHappiness_drawCount_final20_v1";
-const KEY_CONFESSION_SEEN="littleHappiness_confessionSeen_final20_v1";
+const KEY_FIRST="littleHappiness_firstSeen_verify20_v2";
+const KEY_DECK="littleHappiness_remaining_verify20_v2";
+const KEY_LAST="littleHappiness_lastCard_verify20_v2";
+const KEY_CYCLE_SEEN="littleHappiness_cycleSeen_verify20_v2";
+const KEY_DRAW_COUNT="littleHappiness_drawCount_verify20_v2";
+const KEY_CONFESSION_SEEN="littleHappiness_confessionSeen_verify20_v2";
 
 let currentView=null;
 let lastBackground=null;
@@ -787,8 +787,7 @@ window.addEventListener("orientationchange",()=>setTimeout(resizeCityCanvas,120)
 
 function initializeFinalTracking(){
   if(localStorage.getItem(KEY_DRAW_COUNT)===null){
-    const firstAlreadySeen=localStorage.getItem(KEY_FIRST)==="yes";
-    localStorage.setItem(KEY_DRAW_COUNT,firstAlreadySeen ? "1" : "0");
+    localStorage.setItem(KEY_DRAW_COUNT,"0");
   }
 }
 
@@ -1074,17 +1073,6 @@ drawOfficialCard();
 
 function showFirstCard(){
 
-const count=addDrawCount();
-
-if(
-count===20 &&
-localStorage.getItem(KEY_CONFESSION_SEEN)!=="yes"
-){
-  localStorage.setItem(KEY_CONFESSION_SEEN,"yes");
-  showConfessionCard();
-  return;
-}
-
 resetActions();
 
 setHomeBackground();
@@ -1187,17 +1175,6 @@ index:index
 function drawExtraCard(){
 
 startFlight(()=>{
-
-const count=addDrawCount();
-
-if(
-count===20 &&
-localStorage.getItem(KEY_CONFESSION_SEEN)!=="yes"
-){
-  localStorage.setItem(KEY_CONFESSION_SEEN,"yes");
-  showConfessionCard();
-  return;
-}
 
 const result=takeOneCard();
 
