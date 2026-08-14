@@ -479,6 +479,7 @@ button:active{transform:scale(.97)}
 
 <script>
 
+const BUILD_ID="verify20-v3-20260815";
 const HOME_BG="home-flight.jpg";
 const SPRITE_BG="cities-sprite.jpg";
 
@@ -690,12 +691,12 @@ text:`後續真的有東西唷。
 之後就開始正式抽卡。`
 };
 
-const KEY_FIRST="littleHappiness_firstSeen_verify20_v2";
-const KEY_DECK="littleHappiness_remaining_verify20_v2";
-const KEY_LAST="littleHappiness_lastCard_verify20_v2";
-const KEY_CYCLE_SEEN="littleHappiness_cycleSeen_verify20_v2";
-const KEY_DRAW_COUNT="littleHappiness_drawCount_verify20_v2";
-const KEY_CONFESSION_SEEN="littleHappiness_confessionSeen_verify20_v2";
+const KEY_FIRST="littleHappiness_firstSeen_verify20_v3";
+const KEY_DECK="littleHappiness_remaining_verify20_v3";
+const KEY_LAST="littleHappiness_lastCard_verify20_v3";
+const KEY_CYCLE_SEEN="littleHappiness_cycleSeen_verify20_v3";
+const KEY_DRAW_COUNT="littleHappiness_drawCount_verify20_v3";
+const KEY_CONFESSION_SEEN="littleHappiness_confessionSeen_verify20_v3";
 
 let currentView=null;
 let lastBackground=null;
@@ -1115,7 +1116,7 @@ function drawOfficialCard(){
 const count=addDrawCount();
 
 if(
-count===20 &&
+count>=20 &&
 localStorage.getItem(KEY_CONFESSION_SEEN)!=="yes"
 ){
   localStorage.setItem(KEY_CONFESSION_SEEN,"yes");
